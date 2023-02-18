@@ -1,5 +1,6 @@
 package com.development.dependency;
 
+import com.development.activity.CreateUserActivity;
 import com.development.activity.GetProjectsActivity;
 import dagger.Component;
 
@@ -16,5 +17,7 @@ public interface ServiceComponent {
      * @return - GetProjectsActivity
      */
     GetProjectsActivity provideGetProjectsActivity();
+
+    CreateUserActivity provideCreateUserActivity();
 
 }

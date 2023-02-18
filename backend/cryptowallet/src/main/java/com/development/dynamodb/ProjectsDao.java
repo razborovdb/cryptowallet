@@ -30,25 +30,15 @@ public class ProjectsDao {
         Projects projects = new Projects();
         projects.setProjectName(projectName);
 
-        System.out.println("-------------------- project name ------------------------");
-        System.out.println(projects.getProjectName());
-
         DynamoDBQueryExpression<Projects> queryExpression = new DynamoDBQueryExpression<Projects>()
                 .withHashKeyValues(projects);
-        System.out.println("-------------------- query ------------------------");
-        System.out.println(queryExpression);
 
-        try {
-            PaginatedQueryList<Projects> projectsList = dynamoDbMapper.query(Projects.class, queryExpression);
+        PaginatedQueryList<Projects> projectsList = dynamoDbMapper.query(Projects.class, queryExpression);
 
 
-            if (projectsList.size() > 0) {
-                return projectsList.get(0);
-            }
-        } catch (Exception e) {
-
+        if (projectsList.size() > 0) {
+            return projectsList.get(0);
         }
-
 
 
         return new Projects();

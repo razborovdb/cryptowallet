@@ -32,11 +32,11 @@ const HomeTemplate = () => {
                     `${url}/project`, 
                     
                 );
-  
-                setProject(res.data);
+
+                setProject(res.data.project);
   
             } catch (error) {
-              
+
             }
             setLoading(false);
           };       
