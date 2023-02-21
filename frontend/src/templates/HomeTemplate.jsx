@@ -33,7 +33,7 @@ const HomeTemplate = () => {
                     
                 );
 
-                setProject(res.data.project);
+                setProject(res.data);
   
             } catch (error) {
 

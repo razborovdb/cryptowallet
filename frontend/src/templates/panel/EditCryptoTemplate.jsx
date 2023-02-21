@@ -36,26 +36,6 @@ export default function EditCryptoTemplate({cryptoName}) {
     const [amount, setAmount] = useState(0.0);
     const [cost, setCost] = useState(0.0);
 
-  const handleCryptoImageUpload = (e) => {
-    const file = e.target.files[0];
-
-    TransformFileData(file);
-  };
-
-  const TransformFileData = (file) => {
-    const reader = new FileReader();
-
-    if (file) {
-      reader.readAsDataURL(file);
-      reader.onloadend = () => {
-        setCryptoImgUrl(reader.result);
-        setPreviewImg(reader.result);
-      };
-    } else {
-        setCryptoImgUrl("");
-    }
-  };
-
   const navigate = useNavigate();
 
   const handleSubmit = async (e) => {
@@ -86,8 +66,6 @@ export default function EditCryptoTemplate({cryptoName}) {
 
     setCurrentCrypto(selectedCrypto);
     setPreviewImg(selectedCrypto.imageUrl);
-    setCryptoImgUrl("");
-    setCryptoImg(selectedCrypto.image);
     setName(selectedCrypto.cryptoName);
     setDesc(selectedCrypto.cryptoDescription);
     setAmount(selectedCrypto.cryptoAmount);
@@ -112,12 +90,6 @@ export default function EditCryptoTemplate({cryptoName}) {
             <StyledEditCrypto>
                 <StyledForm onSubmit={handleSubmit}>
                     <h3>Edit a Crypto: {name}</h3>
-                    <input
-                    id="imgUpload"
-                    accept="image/*"
-                    type="file"
-                    onChange={handleCryptoImageUpload}
-                    />
                     <input
                     type="text"
                     placeholder="Description"
@@ -146,15 +118,7 @@ export default function EditCryptoTemplate({cryptoName}) {
                     {editStatus === "pending" ? "Submitting" : "Submit"}
                     </PrimaryButton>
                 </StyledForm>
-                <ImagePreview>
-                    {previewImg ? (
-                    <>
-                        <img src={previewImg} alt="error!" />
-                    </>
-                    ) : (
-                    <p>Crypto image upload preview will appear here!</p>
-                    )}
-                </ImagePreview>
+                
             </StyledEditCrypto>
         </DialogContent>
         <DialogActions>
@@ -200,20 +164,4 @@ const StyledForm = styled.form`
 const StyledEditCrypto = styled.div`
   display: flex;
   justify-content: space-between;
-`;
-
-const ImagePreview = styled.div`
-  margin: 2rem 0 2rem 2rem;
-  padding: 2rem;
-  border: 1px solid rgb(183, 183, 183);
-  max-width: 300px;
-  width: 100%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  padding: 2rem;
-  color: rgb(78, 78, 78);
-  img {
-    max-width: 100%;
-  }
 `;

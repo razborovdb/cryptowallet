@@ -21,7 +21,7 @@ const RegisterTemplate = () => {
         password: "",
         avatar: "",
         avatarUrl: "",
-        role: "",
+        role: "user",
         isAdmin: false,
     });
 

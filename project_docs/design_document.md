@@ -152,14 +152,14 @@ String projectId;
 Double paymentDate;
 ```
 ----------------------------------------------------
-## 6.2. RegisterUser Endpoint
+## 6.2. RegisterUser Endpoint (made)
 
 * Accepts `POST` requests to `/user/register`
 * Accepts a User with all parameters and returns token.
   * If the given email in User is found, will return an error.
   * If user created, return token.
 
-## 6.3. LoginUser Endpoint
+## 6.3. LoginUser Endpoint (made)
 
 * Accepts `POST` requests to `/user/login`
 * Accepts a User with email and returns token.
@@ -228,18 +228,12 @@ Double paymentDate;
 * Accepts token, walletName as path variable and CryptoCurrencies with all parameters returns cryptoName.
 
 
-## 6.15. GetUser Endpoint
+## 6.15. GetUser Endpoint (made)
 
 * Accepts `GET` requests to `/api/user`
 * Accepts token, email as path variable returns Users.
 
-
-## 6.16. UpdateUser Endpoint
-
-* Accepts `PUT` requests to `/api/user`
-* Accepts token, Users as body returns Users.
-
-## 6.17. GetProject Endpoint
+## 6.16. GetProject Endpoint (made)
 
 * Accepts `GET` requests to `/api/project`
 * Accepts no parameters returns Projects.

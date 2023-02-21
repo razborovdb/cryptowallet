@@ -54,9 +54,7 @@ const CryptoTemplate = () => {
             <CryptoContainer>
                 {loading ? (<p>Loading...</p>) :
                     <>
-                    <ImageContainer>
-                        <img src={crypto.imageUrl} alt="crypto" />
-                    </ImageContainer>
+                    
                     <CryptoDetails>
                         <h3>{crypto.cryptoName}</h3>
                         <p><span>Description:</span> {crypto.cryptoDescription} </p>
@@ -91,13 +89,6 @@ const CryptoContainer = styled.div`
     box-shadow: rgba(100,100,111,0.2) 0px 7px 29px 0px;
     border-radius: 5px;
     padding: 2rem;
-`;
-
-const ImageContainer = styled.div`
-    flex: 1;
-  img {
-    width: 100%;
-  }  
 `;
 
 const CryptoDetails = styled.div`

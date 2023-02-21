@@ -1,15 +1,13 @@
 package com.development.models.results;
 
-import com.development.dynamodb.models.Projects;
-
-public class CreateUserResult {
+public class LoginUserResult {
     private String token;
 
-    public CreateUserResult() {
+    public LoginUserResult() {
 
     }
 
-    public CreateUserResult(Builder builder) {
+    public LoginUserResult(Builder builder) {
         this.token = builder.token;
     }
 
@@ -23,7 +21,7 @@ public class CreateUserResult {
 
     @Override
     public String toString() {
-        return "CreateUserResult{" +
+        return "LoginUserResult{" +
                 "token='" + token + '\'' +
                 '}';
     }
@@ -44,8 +42,8 @@ public class CreateUserResult {
         }
 
 
-        public CreateUserResult build() {
-            return new CreateUserResult(this);
+        public LoginUserResult build() {
+            return new LoginUserResult(this);
         }
     }
 }

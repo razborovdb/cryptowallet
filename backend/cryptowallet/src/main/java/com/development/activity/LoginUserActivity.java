@@ -5,38 +5,33 @@ import com.amazonaws.services.lambda.runtime.RequestHandler;
 import com.development.dynamodb.UsersDao;
 import com.development.dynamodb.models.Users;
 import com.development.exceptions.BadRequestException;
+import com.development.exceptions.BadUserNameOrPasswordException;
 import com.development.exceptions.ErrorMessage;
 import com.development.exceptions.ServerErrorException;
-import com.development.exceptions.UserAlreadyExistException;
-import com.development.models.requests.CreateUserRequest;
-
-import com.development.models.results.CreateUserResult;
+import com.development.models.requests.LoginUserRequest;
+import com.development.models.results.LoginUserResult;
 import com.development.util.JsonWebToken;
 import org.mindrot.jbcrypt.BCrypt;
 
 import javax.inject.Inject;
 import java.util.Optional;
 
-
-public class CreateUserActivity implements RequestHandler<CreateUserRequest, CreateUserResult> {
-
+public class LoginUserActivity implements RequestHandler<LoginUserRequest, LoginUserResult> {
     private final UsersDao usersDao;
     JsonWebToken jsonWebToken = new JsonWebToken();
 
 
     @Inject
-    public CreateUserActivity(UsersDao usersDao) {
+    public LoginUserActivity(UsersDao usersDao) {
         this.usersDao = usersDao;
     }
 
 
     @Override
-    public CreateUserResult handleRequest(
-            final CreateUserRequest createUserRequest, Context context) {
+    public LoginUserResult handleRequest(
+            final LoginUserRequest loginUserRequest, Context context) {
 
-        System.out.println(createUserRequest);
-
-        if (createUserRequest == null) {
+        if (loginUserRequest == null) {
 
             throw new BadRequestException((ErrorMessage.builder()
                     .withStatus(400)
@@ -46,7 +41,7 @@ public class CreateUserActivity implements RequestHandler<CreateUserRequest, Cre
             ));
 
         }
-        if (createUserRequest.getEmail() == null) {
+        if (loginUserRequest.getEmail() == null) {
             throw new BadRequestException((ErrorMessage.builder()
                     .withStatus(400)
                     .withError("Bad request ...")
@@ -55,37 +50,31 @@ public class CreateUserActivity implements RequestHandler<CreateUserRequest, Cre
             ));
         }
 
-        Users user = usersDao.getUser(createUserRequest.getEmail());
+        Users user = usersDao.getUser(loginUserRequest.getEmail());
 
-        if (user != null) {
-            throw new UserAlreadyExistException((ErrorMessage.builder()
+        if (user == null) {
+            throw new BadUserNameOrPasswordException((ErrorMessage.builder()
                     .withStatus(400)
-                    .withError("User already exist ...")
+                    .withError("Bad user name or password ...")
                     .withContentType("application/json")
                     .build().toString()
             ));
         }
 
-        // Encode password
-        String encrypted = BCrypt.hashpw(createUserRequest.getPassword(), BCrypt.gensalt(10));
+        // Check password
+        if (!BCrypt.checkpw(loginUserRequest.getPassword(), user.getPassword())) {
+            throw new BadUserNameOrPasswordException((ErrorMessage.builder()
+                    .withStatus(400)
+                    .withError("Bad user name or password ...")
+                    .withContentType("application/json")
+                    .build().toString()
+            ));
+        }
 
-                BCrypt.checkpw(createUserRequest.getPassword(), encrypted);
-
-
-
-        Users newUser = new Users(createUserRequest.getEmail(), createUserRequest.getName(),  createUserRequest.getAvatar(),
-                createUserRequest.getAvatarUrl(), encrypted, createUserRequest.getRole(), createUserRequest.getIsAdmin());
-        System.out.println("------------------ newUser");
-        System.out.println(newUser);
-
-        // Save newUser to database
-        Users createdUser = usersDao.createUser(newUser);
-        createdUser.setPassword("");
-        createdUser.setAvatar("");
-        createdUser.setAvatarUrl("");
+        user.setPassword("");
 
         // create web token string
-        Optional<String> jwts = jsonWebToken.genJsonWebToken(createdUser);
+        Optional<String> jwts = jsonWebToken.genJsonWebToken(user);
 
         if (jwts.isEmpty()) {
             throw new ServerErrorException((ErrorMessage.builder()
@@ -96,7 +85,7 @@ public class CreateUserActivity implements RequestHandler<CreateUserRequest, Cre
             ));
         }
 
-        return CreateUserResult.builder()
+        return LoginUserResult.builder()
                 .withToken(jwts.get())
                 .build();
     }

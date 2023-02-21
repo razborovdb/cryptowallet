@@ -29,8 +29,6 @@ export default function CryptosListTemplate() {
     const rows = cryptos ? (cryptos?.map(crypto => {
         return {
             id: crypto.cryptoName,
-            image: crypto.image,
-            imageUrl: crypto.imageUrl,
             desc: crypto.cryptoDescription,
             amount: crypto.cryptoAmount ,
             cost: crypto.cryptoCost,
@@ -40,18 +38,6 @@ export default function CryptosListTemplate() {
     const columns = [
         { field: 'id', headerName: 'Crypto Name', width: 200 },
         
-
-        { field: 'imageUrl', headerName: 'Crypto Image', width: 80, 
-            renderCell: (params) => {
-
-                return (
-                    <ImageContainer>
-                        <img src={params.row.imageUrl} alt=""/>
-                    </ImageContainer>
-                );
-            } 
-        },
-
         {
             field: 'desc',
             headerName: 'Cryptos Description',
@@ -111,12 +97,6 @@ export default function CryptosListTemplate() {
       );
 
 }
- 
-const ImageContainer = styled.div`
-  img {
-    height: 40px;
-  }  
-`;
 
 const Actions = styled.div`
   width: 100%;

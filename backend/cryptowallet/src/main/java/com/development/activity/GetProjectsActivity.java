@@ -36,15 +36,16 @@ public class GetProjectsActivity implements RequestHandler<GetProjectsRequest, G
     public GetProjectsResult handleRequest(
             final GetProjectsRequest getAvailableCryptocurrenciesRequest, Context context) {
         Projects projects = projectsDao.getProjects(defaultProjectName);
-        ProjectsModel projectsModel = new ProjectsModel();
 
         System.out.println(projects);
 
         return GetProjectsResult.builder()
-                .withProject(projects)
+                .withProjectName(projects.getProjectName())
+                .withProjectDescription(projects.getProjectDescription())
+                .withImage(projects.getImage())
+                .withImageUrl(projects.getImageUrl())
+                .withProjectCost(projects.getProjectCost())
                 .build();
-
-
     }
 
 }

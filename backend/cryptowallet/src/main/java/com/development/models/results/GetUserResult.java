@@ -1,8 +1,8 @@
-package com.development.models.requests;
+package com.development.models.results;
 
 import java.util.Objects;
 
-public class CreateUserRequest {
+public class GetUserResult {
     private String email;
 
     private String name;
@@ -17,11 +17,11 @@ public class CreateUserRequest {
 
     private boolean isAdmin;
 
-    public CreateUserRequest() {
+    public GetUserResult() {
 
     }
 
-    public CreateUserRequest(Builder builder) {
+    public GetUserResult(Builder builder) {
         this.email = builder.email;
         this.name = builder.name;
         this.avatar = builder.avatar;
@@ -91,7 +91,7 @@ public class CreateUserRequest {
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-        CreateUserRequest that = (CreateUserRequest) o;
+        GetUserResult that = (GetUserResult) o;
         return Objects.equals(email, that.email);
     }
 
@@ -102,7 +102,7 @@ public class CreateUserRequest {
 
     @Override
     public String toString() {
-        return "CreateUserRequest{" +
+        return "GetUserResult{" +
                 "email='" + email + '\'' +
                 ", name='" + name + '\'' +
                 ", avatar='" + avatar + '\'' +
@@ -171,8 +171,8 @@ public class CreateUserRequest {
         }
 
 
-        public CreateUserRequest build() {
-            return new CreateUserRequest(this);
+        public GetUserResult build() {
+            return new GetUserResult(this);
         }
     }
 }

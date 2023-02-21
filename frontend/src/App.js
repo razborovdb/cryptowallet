@@ -22,8 +22,6 @@ import CryptosListTemplate from './templates/panel/lists/CryptosListTemplate';
 import CryptoTemplate from './templates/panel/details/CryptoTemplate';
 import ViewCryptoInWalletTemplate from './templates/panel/ViewCryptoInWalletTemplate';
 import EditCryptoInWalletTemplate from './templates/panel/EditCryptoInWalletTemplate';
-import EditUserTemplate from './templates/panel/EditUserTemplate';
-
 
 function App() {
   return (
@@ -45,7 +43,6 @@ function App() {
           
           </Route>
           <Route path="/wallet/:walletName" element={<WalletTemplate />}/>
-          <Route path="/edit-user" element={<EditUserTemplate />}/>
           <Route path="/wallet/create-crypto/:walletName" element={<CreateCryptoInWalletTemplate />}/>
           <Route path="/wallet/view-crypto/:walletName/:cryptoName" element={<ViewCryptoInWalletTemplate />}/>
           <Route path="/wallet/edit-crypto-wallet/:walletName/:cryptoName" element={<EditCryptoInWalletTemplate />}/>

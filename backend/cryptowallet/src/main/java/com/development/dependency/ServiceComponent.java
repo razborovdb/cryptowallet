@@ -1,7 +1,6 @@
 package com.development.dependency;
 
-import com.development.activity.CreateUserActivity;
-import com.development.activity.GetProjectsActivity;
+import com.development.activity.*;
 import dagger.Component;
 
 import javax.inject.Singleton;
@@ -19,5 +18,7 @@ public interface ServiceComponent {
     GetProjectsActivity provideGetProjectsActivity();
 
     CreateUserActivity provideCreateUserActivity();
+    LoginUserActivity provideLoginUserActivity();
+    GetUserActivity provideGetUserActivity();
 
 }

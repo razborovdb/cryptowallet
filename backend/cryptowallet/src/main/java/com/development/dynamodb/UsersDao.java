@@ -35,6 +35,15 @@ public class UsersDao {
             return null;
         }
     }
+    public Users updateUser(Users user) {
+
+        try {
+            dynamoDbMapper.save(user);
+            return user;
+        } catch (Exception e) {
+            return null;
+        }
+    }
     public Users getUser(String userName) {
         Users user = new Users();
         user.setEmail(userName);

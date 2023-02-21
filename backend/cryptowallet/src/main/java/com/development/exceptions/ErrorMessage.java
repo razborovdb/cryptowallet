@@ -43,7 +43,7 @@ public class ErrorMessage {
         return "(" +
                 "\"status\":" + status +
                 ",\"error\":\"" + error +
-                "\",\"Content-type\":\"" + contentType + "\"}}";
+                "\",\"Content-type\":\"" + contentType + "\"}";
     }
 
     public static Builder builder() {

@@ -36,7 +36,7 @@ export const registerUser = createAsyncThunk(
 
            // localStorage.setItem("token", token.data);
 
-            return token.data;
+            return token.data.token;
         } catch(err) {
             return rejectWithValue(err.response.data);
         }
@@ -57,7 +57,7 @@ export const loginUser = createAsyncThunk(
 
            // localStorage.setItem("token", token.data);
 
-            return token.data;
+            return token.data.token;
         } catch(err) {
 
             return rejectWithValue(err.response.data);
@@ -69,7 +69,7 @@ export const loginUser = createAsyncThunk(
 export const updateUser = createAsyncThunk(
     "auth/updateUser",
     async (values, {rejectWithValue}) => {
-        console.log(values);
+
         try {
 
 
@@ -91,11 +91,11 @@ export const updateUser = createAsyncThunk(
             );
 
            // localStorage.setItem("token", token.data);
-           console.log(response.data);
+
 
             return response.data;
         } catch(err) {
-            console.log(err);
+
             return rejectWithValue(err.response.data);
         }
     }
@@ -177,6 +177,7 @@ const authSlice = createSlice({
             return {...state, loginStatus: "pending"};
         });
         builder.addCase(loginUser.fulfilled, (state, action) => {
+
             if (action.payload) {
                 const user = jwtDecode(action.payload);
 
@@ -207,11 +208,11 @@ const authSlice = createSlice({
 
 
         builder.addCase(updateUser.pending, (state, action) => {
-            console.log("start");
+  
             return {...state, updateUserStatus: "pending"};
         });
         builder.addCase(updateUser.fulfilled, (state, action) => {
-            console.log("fullfield");
+
             return {
                 ...state,
                 updateUserStatus: "success",
@@ -219,7 +220,7 @@ const authSlice = createSlice({
             }
         });
         builder.addCase(updateUser.rejected, (state, action) => {
-            console.log(action.payload);
+
             return {
                 ...state,
                 updateUserStatus: "rejected",
