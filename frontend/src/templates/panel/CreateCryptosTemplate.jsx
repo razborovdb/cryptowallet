@@ -17,24 +17,6 @@ const CreateCryptosTemplate = () => {
     const [amount, setAmount] = useState("");
     const [cost, setCost] = useState("");
 
-    const handleCryptoImageUpload = (e) => {
-        const file = e.target.files[0];
-
-        TransformFileData(file);
-    };
-
-    const TransformFileData = (file) => {
-        const reader = new FileReader();
-
-        if (file) {
-            reader.readAsDataURL(file);
-            reader.onloadend = () => {
-                setCryptoImgUrl(reader.result);
-            };
-        } else {
-            setCryptoImgUrl("");
-        }
-    };
 
     const navigate = useNavigate();
 
@@ -61,13 +43,6 @@ const CreateCryptosTemplate = () => {
     <StyledCreateCrypto>
       <StyledForm onSubmit={handleSubmit}>
         <h3>Create a Crypto</h3>
-        <input
-          id="imgUpload"
-          accept="image/*"
-          type="file"
-          onChange={handleCryptoImageUpload}
-          required
-        />
         <input
           type="text"
           placeholder="Name"
@@ -112,15 +87,7 @@ const CreateCryptosTemplate = () => {
           </Link>
         </div>
       </StyledForm>
-      <ImagePreview>
-        {cryptoImgUrl ? (
-          <>
-            <img src={cryptoImgUrl} alt="error!" />
-          </>
-        ) : (
-          <p>Crypto image upload preview will appear here!</p>
-        )}
-      </ImagePreview>
+    
     </StyledCreateCrypto>
   );
 }
@@ -152,20 +119,4 @@ const StyledForm = styled.form`
 const StyledCreateCrypto = styled.div`
   display: flex;
   justify-content: space-between;
-`;
-
-const ImagePreview = styled.div`
-  margin: 2rem 0 2rem 2rem;
-  padding: 2rem;
-  border: 1px solid rgb(183, 183, 183);
-  max-width: 300px;
-  width: 100%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  padding: 2rem;
-  color: rgb(78, 78, 78);
-  img {
-    max-width: 100%;
-  }
 `;

@@ -12,7 +12,7 @@ export default function WalletsListTemplate() {
     const navigate = useNavigate();
     const dispatch = useDispatch();
     const {wallets} = useSelector((state) => state.wallets);
-
+    const {status} = useSelector((state) => state.wallets);
 
     useEffect(() => {
 
@@ -97,17 +97,17 @@ export default function WalletsListTemplate() {
         toast("Deleted");
       }
   return (
+          <div style={{ height: 400, width: '100%' }}>
+            <DataGrid
+              rows={rows}
+              columns={columns}
+              pageSize={5}
+              rowsPerPageOptions={[5]}
+              checkboxSelection
+              disableSelectionOnClick
+            />
+          </div>
 
-        <div style={{ height: 400, width: '100%' }}>
-          <DataGrid
-            rows={rows}
-            columns={columns}
-            pageSize={5}
-            rowsPerPageOptions={[5]}
-            checkboxSelection
-            disableSelectionOnClick
-          />
-        </div>
 
   );
 }

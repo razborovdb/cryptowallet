@@ -42,7 +42,7 @@ export const walletsFetch = createAsyncThunk(
 
          // localStorage.setItem("token", token.data);
 
-          return response.data;
+          return response.data.walletList;
       } catch(err) {
 
           return rejectWithValue(err.response.data);

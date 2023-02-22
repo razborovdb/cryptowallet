@@ -166,37 +166,37 @@ Double paymentDate;
   * If the User with given email is not found, will return an error.
   * If User is found, return token.
 
-## 6.4. GetAvailableCryptocurrencies Endpoint
+## 6.4. GetAvailableCrypto Endpoint (made)
 
 * Accepts `GET` requests to `/api/cryptos`
 * Accepts token and returns the list of available cryptocurrencies.
 
-## 6.4. DeleteCryptoInAvailableCryptocurrencies Endpoint
+## 6.4. DeleteCryptoInAvailableCrypto Endpoint (made)
 
 * Accepts `DELETE` requests to `/api/crypto`
 * Accepts token and CryptoCurrencies with cryptoName returns cryptoName.
 
-## 6.5. AddCryptoToAvailableCryptocurrencies Endpoint
+## 6.5. AddCryptoToAvailableCrypto Endpoint (made)
 
 * Accepts `POST` requests to `/api/crypto`
 * Accepts token and CryptoCurrencies with all parameters returns added crypto.
 
-## 6.6. UpdateCryptoInAvailableCryptocurrencies Endpoint
+## 6.6. UpdateCryptoInAvailableCryptocurrencies Endpoint (made)
 
 * Accepts `PUT` requests to `/api/crypto`
 * Accepts token and CryptoCurrencies with cryptoName returns updated crypto.
 
-## 6.7. GetCryptoFromAvailableCryptocurrencies Endpoint
+## 6.7. GetCryptoFromAvailableCryptocurrencies Endpoint (made)
 
 * Accepts `GET` requests to `/api/crypto`
 * Accepts token and cryptoName as request param, returns crypto.
 
-## 6.8. GetUserWallets Endpoint
+## 6.8. GetUserWallets Endpoint (made)
 
 * Accepts `GET` requests to `/api/wallets`
 * Accepts token and email as request param, returns user wallets list.
 
-## 6.9. AddWallet Endpoint
+## 6.9. AddWallet Endpoint (made)
 
 * Accepts `POST` requests to `/api/wallet`
 * Accepts token and Wallets with all parameters returns added wallet.

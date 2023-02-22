@@ -34,8 +34,6 @@ public class CreateUserActivity implements RequestHandler<CreateUserRequest, Cre
     public CreateUserResult handleRequest(
             final CreateUserRequest createUserRequest, Context context) {
 
-        System.out.println(createUserRequest);
-
         if (createUserRequest == null) {
 
             throw new BadRequestException((ErrorMessage.builder()
@@ -75,8 +73,7 @@ public class CreateUserActivity implements RequestHandler<CreateUserRequest, Cre
 
         Users newUser = new Users(createUserRequest.getEmail(), createUserRequest.getName(),  createUserRequest.getAvatar(),
                 createUserRequest.getAvatarUrl(), encrypted, createUserRequest.getRole(), createUserRequest.getIsAdmin());
-        System.out.println("------------------ newUser");
-        System.out.println(newUser);
+
 
         // Save newUser to database
         Users createdUser = usersDao.createUser(newUser);

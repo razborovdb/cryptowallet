@@ -30,7 +30,7 @@ export const getAllCryptos = createAsyncThunk(
             }
             );
 
-            return cryptosList?.data;
+            return cryptosList?.data.cryptocurrencyList;
         } catch(err) {
             return rejectWithValue(err.response.data);
         }

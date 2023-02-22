@@ -50,7 +50,7 @@ const EditCryptoInWalletTemplate = () => {
           );
 
           setCryptos(cryptosList.data);
-          const curCryptos = cryptosList.data;
+          const curCryptos = cryptosList.data.cryptocurrencyList;
 
           const res = await axios.get(
             `${url}/wallet`, 

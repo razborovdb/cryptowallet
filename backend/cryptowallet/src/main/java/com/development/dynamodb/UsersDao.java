@@ -45,6 +45,7 @@ public class UsersDao {
         }
     }
     public Users getUser(String userName) {
+
         Users user = new Users();
         user.setEmail(userName);
 
@@ -54,7 +55,6 @@ public class UsersDao {
 
         try {
             PaginatedQueryList<Users> usersList = dynamoDbMapper.query(Users.class, queryExpression);
-
             if (usersList.size() > 0) {
                 return usersList.get(0);
             }

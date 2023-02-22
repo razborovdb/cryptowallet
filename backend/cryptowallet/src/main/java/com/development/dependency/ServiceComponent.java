@@ -20,5 +20,12 @@ public interface ServiceComponent {
     CreateUserActivity provideCreateUserActivity();
     LoginUserActivity provideLoginUserActivity();
     GetUserActivity provideGetUserActivity();
+    GetAvailableCryptoActivity provideGetAvailableCryptoActivity();
+    AddCryptoToAvailableCryptoActivity provideAddCryptoToAvailableCryptoActivity();
+    GetCryptoFromAvailableCryptoActivity provideGetCryptoFromAvailableCryptoActivity();
+    UpdateCryptoInAvailableCryptoActivity provideUpdateCryptoInAvailableCryptoActivity();
+    DeleteCryptoInAvailableCryptoActivity provideDeleteCryptoInAvailableCryptoActivity();
+    AddWalletActivity provideAddWalletActivity();
+    GetUserWalletActivity provideGetUserWalletActivity();
 
 }
