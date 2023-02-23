@@ -3,7 +3,9 @@ package com.development.dynamodb.models;
 import com.amazonaws.services.dynamodbv2.datamodeling.DynamoDBAttribute;
 import com.amazonaws.services.dynamodbv2.datamodeling.DynamoDBHashKey;
 import com.amazonaws.services.dynamodbv2.datamodeling.DynamoDBTable;
+import com.amazonaws.services.dynamodbv2.datamodeling.DynamoDBTyped;
 
+@DynamoDBTable(tableName = "cryptomodel")
 public class CryptoCurrenciesModel {
     private String cryptoName;
     private String cryptoType;
@@ -18,7 +20,7 @@ public class CryptoCurrenciesModel {
 
     private double cryptoCost;
 
-    @DynamoDBAttribute(attributeName = "cryptoname")
+    @DynamoDBHashKey(attributeName = "cryptoname")
     public String getCryptoName() {
         return cryptoName;
     }
@@ -76,6 +78,20 @@ public class CryptoCurrenciesModel {
     }
 
     public void setCryptoCost(double cryptoCost) {
+        this.cryptoCost = cryptoCost;
+    }
+
+    public CryptoCurrenciesModel() {
+
+    }
+
+    public CryptoCurrenciesModel(String cryptoName, String cryptoType, String image, String imageUrl, String cryptoDescription, double cryptoAmount, double cryptoCost) {
+        this.cryptoName = cryptoName;
+        this.cryptoType = cryptoType;
+        this.image = image;
+        this.imageUrl = imageUrl;
+        this.cryptoDescription = cryptoDescription;
+        this.cryptoAmount = cryptoAmount;
         this.cryptoCost = cryptoCost;
     }
 

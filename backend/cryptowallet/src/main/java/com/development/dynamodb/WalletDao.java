@@ -20,11 +20,13 @@ public class WalletDao {
     }
 
     public Wallet getWallet(String userId, String walletName) {
+
         try {
             Wallet wallet = dynamoDbMapper.load(Wallet.class, userId, walletName);
 
             return wallet;
         } catch (Exception e) {
+
             return null;
         }
     }
@@ -60,10 +62,12 @@ public class WalletDao {
     }
 
     public Wallet updateWallet(Wallet wallet) {
+
         try {
             dynamoDbMapper.save(wallet);
             return wallet;
         } catch (Exception e) {
+
             return null;
         }
 
@@ -75,6 +79,7 @@ public class WalletDao {
             dynamoDbMapper.delete(wallet);
             return wallet;
         } catch (Exception e) {
+
             return null;
         }
 

@@ -152,94 +152,93 @@ String projectId;
 Double paymentDate;
 ```
 ----------------------------------------------------
-## 6.2. RegisterUser Endpoint
+## 6.2. RegisterUser Endpoint (made)
 
 * Accepts `POST` requests to `/user/register`
 * Accepts a User with all parameters and returns token.
   * If the given email in User is found, will return an error.
   * If user created, return token.
 
-## 6.3. LoginUser Endpoint
+## 6.3. LoginUser Endpoint (made)
 
 * Accepts `POST` requests to `/user/login`
 * Accepts a User with email and returns token.
   * If the User with given email is not found, will return an error.
   * If User is found, return token.
 
-## 6.4. GetAvailableCryptocurrencies Endpoint
+## 6.4. GetAvailableCrypto Endpoint (made)
 
 * Accepts `GET` requests to `/api/cryptos`
 * Accepts token and returns the list of available cryptocurrencies.
 
-## 6.4. DeleteCryptoInAvailableCryptocurrencies Endpoint
+## 6.4. DeleteCryptoInAvailableCrypto Endpoint (made)
 
 * Accepts `DELETE` requests to `/api/crypto`
 * Accepts token and CryptoCurrencies with cryptoName returns cryptoName.
 
-## 6.5. AddCryptoToAvailableCryptocurrencies Endpoint
+## 6.5. AddCryptoToAvailableCrypto Endpoint (made)
 
 * Accepts `POST` requests to `/api/crypto`
 * Accepts token and CryptoCurrencies with all parameters returns added crypto.
 
-## 6.6. UpdateCryptoInAvailableCryptocurrencies Endpoint
+## 6.6. UpdateCryptoInAvailableCryptocurrencies Endpoint (made)
 
 * Accepts `PUT` requests to `/api/crypto`
 * Accepts token and CryptoCurrencies with cryptoName returns updated crypto.
 
-## 6.7. GetCryptoFromAvailableCryptocurrencies Endpoint
+## 6.7. GetCryptoFromAvailableCryptocurrencies Endpoint (made)
 
 * Accepts `GET` requests to `/api/crypto`
 * Accepts token and cryptoName as request param, returns crypto.
 
-## 6.8. GetUserWallets Endpoint
+## 6.8. GetUserWallets Endpoint (made)
 
 * Accepts `GET` requests to `/api/wallets`
 * Accepts token and email as request param, returns user wallets list.
 
-## 6.9. AddWallet Endpoint
+## 6.9. AddWallet Endpoint (made)
 
 * Accepts `POST` requests to `/api/wallet`
 * Accepts token and Wallets with all parameters returns added wallet.
 
 
-## 6.10. GetUserOneWallet Endpoint
+## 6.10. GetUserOneWallet Endpoint (made)
 
 * Accepts `GET` requests to `/api/wallet`
 * Accepts token, email and walletName as request param, returns user wallet.
 
-## 6.11. DeleteUserWallet Endpoint
+## 6.11. DeleteUserWallet Endpoint (made)
 
 * Accepts `DELETE` requests to `/api/wallet`
 * Accepts token and Wallet with userId and walletName returns walletName.
 
-## 6.12. AddCryptoToUserWallet Endpoint
+## 6.12. UpdateUserWallet Endpoint (made)
+
+* Accepts `PUT` requests to `/api/wallet`
+* Accepts token and Wallet with all parameters returns Wallet.
+
+## 6.13. AddCryptoToUserWallet Endpoint (made)
 
 * Accepts `POST` requests to `/api/wallet/crypto`
-* Accepts token, walletName as path variable and CryptoCurrencies with all parameters returns CryptoCurrencies.
+* Accepts token, walletName as path variable and CryptoCurrencies with all parameters returns Wallet.
 
-## 6.13. UpdateCryptoInUserWallet Endpoint
+## 6.14. UpdateCryptoInUserWallet Endpoint (made)
 
 * Accepts `PUT` requests to `/api/wallet/crypto`
 * Accepts token, walletName as path variable and CryptoCurrencies with all parameters returns CryptoCurrencies.
 
-## 6.14. DeleteCryptoInUserWallet Endpoint
+## 6.15. DeleteCryptoInUserWallet Endpoint
 
 * Accepts `DELETE` requests to `/api/wallet/crypto`
 * Accepts token, walletName as path variable and CryptoCurrencies with all parameters returns cryptoName.
 
 
-## 6.15. GetUser Endpoint
+## 6.16. GetUser Endpoint (made)
 
 * Accepts `GET` requests to `/api/user`
 * Accepts token, email as path variable returns Users.
 
-
-## 6.16. UpdateUser Endpoint
-
-* Accepts `PUT` requests to `/api/user`
-* Accepts token, Users as body returns Users.
-
-## 6.17. GetProject Endpoint
+## 6.17. GetProject Endpoint (made)
 
 * Accepts `GET` requests to `/api/project`
 * Accepts no parameters returns Projects.

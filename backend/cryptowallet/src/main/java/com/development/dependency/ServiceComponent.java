@@ -27,5 +27,11 @@ public interface ServiceComponent {
     DeleteCryptoInAvailableCryptoActivity provideDeleteCryptoInAvailableCryptoActivity();
     AddWalletActivity provideAddWalletActivity();
     GetUserWalletActivity provideGetUserWalletActivity();
+    GetUserOneWalletActivity provideGetUserOneWalletActivity();
+    DeleteUserWalletActivity provideDeleteUserWalletActivity();
+    UpdateWalletActivity provideUpdateWalletActivity();
+    AddCryptoToWalletActivity provideAddCryptoToWalletActivity();
+    UpdateCryptoInWalletActivity provideUpdateCryptoInWalletActivity();
+    DeleteCryptoInWalletActivity provideDeleteCryptoInWalletActivity();
 
 }

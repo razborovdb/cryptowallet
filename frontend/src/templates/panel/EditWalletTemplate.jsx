@@ -122,7 +122,7 @@ const EditWalletTemplate = () => {
             renderCell: (params) => {
                   return (
                       <Actions>
-                          <Delete onClick={() => handleDelete(params.row.id)}>Delete</Delete>
+                          <Delete onClick={() => handleDelete(params.row.id, params.row.cryptoType)}>Delete</Delete>
                           <Edit onClick={() => handleEdit(params.row.id)}>Edit</Edit>
                           <View onClick={() => handleView(params.row.id)}>
                               View
@@ -147,7 +147,7 @@ const EditWalletTemplate = () => {
       navigate(`/wallet/edit-crypto-wallet/${walletName}/${cryptoName}`);
   };
 
-    const handleDelete = (cryptoName) => {
+    const handleDelete = (cryptoName, cryptoType) => {
 
 
       async function fetchData() {
@@ -161,6 +161,7 @@ const EditWalletTemplate = () => {
                       userId: auth.email,
                       walletName: walletName,
                       cryptoName: cryptoName,
+                      cryptoType: cryptoType,
                       image: "",
                       imageUrl: "",
                       cryptoDescription: "",

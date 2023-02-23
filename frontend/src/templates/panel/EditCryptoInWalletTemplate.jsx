@@ -49,7 +49,7 @@ const EditCryptoInWalletTemplate = () => {
           }
           );
 
-          setCryptos(cryptosList.data);
+          setCryptos(cryptosList.data.cryptocurrencyList);
           const curCryptos = cryptosList.data.cryptocurrencyList;
 
           const res = await axios.get(
@@ -76,7 +76,7 @@ const EditCryptoInWalletTemplate = () => {
           setAmount(findCrypto.cryptoAmount);
           setCost(findCrypto.cryptoCost);
 
-          let findsCrypto = cryptosList.data.filter((crypto) => crypto.cryptoName === findCrypto.cryptoType);
+          let findsCrypto = cryptosList.data.cryptocurrencyList.filter((crypto) => crypto.cryptoName === findCrypto.cryptoType);
           findsCrypto = findsCrypto[0];
 
           setCryptoParams(findsCrypto);
@@ -130,7 +130,7 @@ const EditCryptoInWalletTemplate = () => {
 
     const handleChangeAmount = (e) => {
       const changeAmount = e.target.value;
-
+      
 
       setAmount(changeAmount);
 
@@ -160,6 +160,10 @@ const EditCryptoInWalletTemplate = () => {
               {crypto.cryptoName}
             </option>
           ))}
+
+          
+
+
         </select>
 
         <input
