@@ -1,8 +1,5 @@
 package com.development.models.requests;
 
-
-import lombok.*;
-
 public class GetProjectsRequest {
 
     public GetProjectsRequest() {

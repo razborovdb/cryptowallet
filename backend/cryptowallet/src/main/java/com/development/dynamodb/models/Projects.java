@@ -1,8 +1,6 @@
 package com.development.dynamodb.models;
 
 import com.amazonaws.services.dynamodbv2.datamodeling.*;
-import lombok.*;
-
 
 @DynamoDBTable(tableName = "projects")
 public class Projects {

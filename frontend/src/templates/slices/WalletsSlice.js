@@ -192,7 +192,7 @@ export const walletsCreate = createAsyncThunk(
                 headers: setHeaders(values.token),
             },
         );
-        toast.warning("Wallet Deleted");
+
         return response.data;
       } catch (error) {
         
@@ -223,7 +223,7 @@ export const walletsCreate = createAsyncThunk(
                 headers: setHeaders(values.token),
             },
         );
-        toast.warning("Wallet Deleted");
+
         return response.data;
       } catch (error) {
         
@@ -317,6 +317,9 @@ const walletsSlice = createSlice({
 
             const newList = state.wallets.filter((wallet) => true);
             newList.push(action.payload);
+            toast.success("Wallet: " + action.payload.walletName + " created", {
+                position: "bottom-left",
+            });
             return {
                 ...state,
                 wallets: newList,
@@ -337,6 +340,9 @@ const walletsSlice = createSlice({
         });
         builder.addCase(walletsDelete.fulfilled, (state, action) => {
             const newList = state.wallets.filter((wallet) => wallet.walletName !== action.payload);
+            toast.success("Wallet: " + action.payload + " deleted", {
+                position: "bottom-left",
+            });
             return {
                 ...state,
                 wallets: newList,
@@ -361,9 +367,14 @@ const walletsSlice = createSlice({
             // const newList = action.payload ? state.wallets.filter((wallet) => wallet.walletName !== action.payload.walletName)
             //     : state.wallets;
             //     newList.push(action.payload);
+            const newList = state.wallets.filter((wallet) => wallet.walletName !== action.payload.walletName);
+            newList.push(action.payload);
+            toast.success("Crypto added to wallet: " + action.payload.walletName, {
+                position: "bottom-left",
+            });
             return {
                 ...state,
-                // wallets: newList,
+                wallets: newList,
                 createCryptoStatus: "success"
             };
             
@@ -386,6 +397,9 @@ const walletsSlice = createSlice({
             const newList = state.wallets.filter((wallet) => wallet.walletName !== action.payload.walletName);
 
             newList.push(action.payload);
+            toast.success("Crypto updated in wallet: " + action.payload.walletName, {
+                position: "bottom-left",
+            });
             return {
                 ...state,
                 wallets: newList,
@@ -411,6 +425,9 @@ const walletsSlice = createSlice({
 
             const newList = state.wallets.filter((wallet) => wallet.walletName !== action.payload.walletName);
                 newList.push(action.payload);
+                toast.success("Crypto deleted in wallet: " + action.payload.walletName, {
+                    position: "bottom-left",
+                });
             return {
                 ...state,
                 wallets: newList,
@@ -438,6 +455,9 @@ const walletsSlice = createSlice({
 
             const newList = state.wallets.filter((wallet) => wallet.walletName !== action.payload.walletName);
                 newList.push(action.payload);
+                toast.success("Wallet: " + action.payload.walletName + " updated", {
+                    position: "bottom-left",
+                });
             return {
                 ...state,
                 wallets: newList,

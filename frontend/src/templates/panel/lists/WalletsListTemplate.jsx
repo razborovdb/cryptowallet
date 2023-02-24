@@ -97,6 +97,9 @@ export default function WalletsListTemplate() {
         toast("Deleted");
       }
   return (
+    <div>
+        {(status==="pending") ? (<p>Loading...</p>) : 
+        (status==="success") ? (
           <div style={{ height: 400, width: '100%' }}>
             <DataGrid
               rows={rows}
@@ -106,7 +109,10 @@ export default function WalletsListTemplate() {
               checkboxSelection
               disableSelectionOnClick
             />
-          </div>
+          </div>)
+        : (<p>Load Error</p>)
+        }
+        </div>
 
 
   );

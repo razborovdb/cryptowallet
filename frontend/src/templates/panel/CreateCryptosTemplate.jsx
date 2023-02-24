@@ -42,7 +42,7 @@ const CreateCryptosTemplate = () => {
     return (
     <StyledCreateCrypto>
       <StyledForm onSubmit={handleSubmit}>
-        <h3>Create a Crypto</h3>
+        <h3>Add a Crypto</h3>
         <input
           type="text"
           placeholder="Name"

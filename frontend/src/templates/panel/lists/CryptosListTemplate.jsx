@@ -3,7 +3,6 @@ import { useEffect } from "react";
 import { DataGrid } from '@mui/x-data-grid';
 import {useDispatch, useSelector} from "react-redux";
 import { useNavigate } from "react-router-dom";
-import { toast } from "react-toastify";
 import EditCryptoTemplate from "../EditCryptoTemplate";
 import { getAllCryptos, cryptosDelete } from "../../slices/CryptoCurrenciesSlice";
 
@@ -13,6 +12,7 @@ export default function CryptosListTemplate() {
     const navigate = useNavigate();
     const dispatch = useDispatch();
     const {cryptos} = useSelector((state) => state.cryptos);
+    const {status} = useSelector((state) => state.cryptos);
   
   
     useEffect(() => {
@@ -80,10 +80,12 @@ export default function CryptosListTemplate() {
             }
             )
         );
-        toast("Deleted");
     }
 
     return (
+      <div>
+        {(status==="pending") ? (<p>Loading...</p>) : 
+        (status==="success") ? (
         <div style={{ height: 400, width: '100%' }}>
           <DataGrid
             rows={rows}
@@ -93,6 +95,9 @@ export default function CryptosListTemplate() {
             checkboxSelection
             disableSelectionOnClick
           />
+        </div>)
+        : (<p>Load Error</p>)
+}
         </div>
       );
 

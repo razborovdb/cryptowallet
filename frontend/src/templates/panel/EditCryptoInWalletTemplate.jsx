@@ -4,10 +4,8 @@ import { useNavigate, useParams, Link } from "react-router-dom";
 import axios from "axios";
 import { setHeaders, url } from "../slices/api";
 import styled from "styled-components";
-import { getAllCryptos } from "../slices/CryptoCurrenciesSlice";
 
 import {walletsUpdateCrypto} from "../slices/WalletsSlice"
-
 
 const EditCryptoInWalletTemplate = () => {
     const dispatch = useDispatch();
@@ -26,7 +24,6 @@ const EditCryptoInWalletTemplate = () => {
     const [findedCrypto, setFindedCrypto] = useState("");
     const [cryptoName, setCryptoName] = useState("");
     const [walletName, setWalletName] = useState(params.walletName);
-    // const {cryptos} = useSelector((state) => state.cryptos);
     const [cryptoParams, setCryptoParams] = useState("");
     const [loading, setLoading] = useState(false);
     const [cryptos, setCryptos] = useState([]);

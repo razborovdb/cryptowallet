@@ -1,11 +1,8 @@
 import * as React from 'react';
 import styled from "styled-components";
 import Button from '@mui/material/Button';
-import TextField from '@mui/material/TextField';
 import Dialog from '@mui/material/Dialog';
-import DialogActions from '@mui/material/DialogActions';
 import DialogContent from '@mui/material/DialogContent';
-import DialogContentText from '@mui/material/DialogContentText';
 import DialogTitle from '@mui/material/DialogTitle';
 
 import { useState } from "react";
@@ -13,8 +10,6 @@ import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { PrimaryButton } from "./CommonStyled";
 import { cryptosUpdate } from "../slices/CryptoCurrenciesSlice";
-import { toast } from "react-toastify";
-
 
 export default function EditCryptoTemplate({cryptoName}) {
     const [open, setOpen] = React.useState(false);
@@ -26,7 +21,7 @@ export default function EditCryptoTemplate({cryptoName}) {
 
     const [currentCrypto, setCurrentCrypto] = useState({});
     const [previewImg, setPreviewImg] = useState("");
-    const { editStatus } = useSelector((state) => state.cryptos);
+    const { updateStatus } = useSelector((state) => state.cryptos);
 
     const [cryptoImg, setCryptoImg] = useState("");
 
@@ -55,7 +50,7 @@ export default function EditCryptoTemplate({cryptoName}) {
       
     );
 
-    setOpen(false);
+    //setOpen(false);
   };
 
   const handleClickOpen = () => {
@@ -84,7 +79,7 @@ export default function EditCryptoTemplate({cryptoName}) {
       <Edit onClick={handleClickOpen}>
         Edit
       </Edit>
-      <Dialog open={open} onClose={handleClose} fullWidth={true} maxWidth={"md"}>
+      <Dialog open={open} onClose={handleClose} fullWidth={false} maxWidth={"md"}>
         <DialogTitle>Edit Crypto</DialogTitle>
         <DialogContent>
             <StyledEditCrypto>
@@ -115,15 +110,27 @@ export default function EditCryptoTemplate({cryptoName}) {
                     />
 
                     <PrimaryButton type="submit">
-                    {editStatus === "pending" ? "Submitting" : "Submit"}
+                    {updateStatus === "pending" ? "Submitting" : "Submit"}
                     </PrimaryButton>
+                    <div className="back-to-cryptos">
+                      <Button onClick={handleClose}>
+                        <svg xmlns="http://www.w3.org/2000/svg" 
+                          width="20" 
+                          height="20" 
+                          fill="currentColor" 
+                          className="bi bi-arrow-left" 
+                          viewBox="0 0 16 16">
+                          <path fillRule="evenodd" d="M15 8a.5.5 0 0 0-.5-.5H2.707l3.147-3.146a.5.5 0 1 0-.708-.708l-4 4a.5.5 0 0 0 0 .708l4 4a.5.5 0 0 0 .708-.708L2.707 8.5H14.5A.5.5 0 0 0 15 8z"/>
+                        </svg>
+                        <span>Back To Cryptos</span>
+                        
+                      </Button>
+                    </div>
                 </StyledForm>
-                
+  
             </StyledEditCrypto>
         </DialogContent>
-        <DialogActions>
-          <Button onClick={handleClose}>Cancel</Button>
-        </DialogActions>
+        
       </Dialog>
     </div>
   );

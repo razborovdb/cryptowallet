@@ -1,14 +1,12 @@
 import {createAsyncThunk, createSlice} from "@reduxjs/toolkit";
 import axios from "axios";
 import {setHeaders, url} from "./api";
-import jwtDecode from "jwt-decode";
 import {toast} from "react-toastify";
 import 'react-toastify/dist/ReactToastify.css';
 
-
 const initialState = {
     cryptos: [],
-    status: "",
+    status: "pending",
     error: "",
     createStatus: "",
     createError: "",
@@ -183,6 +181,9 @@ const cryptosSlice = createSlice({
 
             const newList = state.cryptos.filter((crypto) => true);
             newList.push(action.payload);
+            toast.success("Crypto: " + action.payload.cryptoName + " added", {
+              position: "bottom-left",
+          });
             return {
                 ...state,
                 cryptos: newList,
@@ -207,6 +208,9 @@ const cryptosSlice = createSlice({
 
             const newList = state.cryptos.filter((crypto) => crypto.cryptoName !== action.payload.cryptoName);
             newList.push(action.payload);
+            toast.success("Crypto: " + action.payload.cryptoName + " updated", {
+              position: "bottom-left",
+            });
             return {
                 ...state,
                 cryptos: newList,
