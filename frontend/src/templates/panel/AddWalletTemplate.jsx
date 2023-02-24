@@ -32,7 +32,7 @@ const AddWalletTemplate = () => {
       })
     );
 
-    navigate("/panel/wallets");
+    //navigate("/panel/wallets");
 
   };
 

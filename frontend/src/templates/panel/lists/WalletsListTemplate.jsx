@@ -94,7 +94,6 @@ export default function WalletsListTemplate() {
             }
           )
         );
-        toast("Deleted");
       }
   return (
     <div>
@@ -117,12 +116,6 @@ export default function WalletsListTemplate() {
 
   );
 }
-
-const ImageContainer = styled.div`
-  img {
-    height: 40px;
-  }  
-`;
 
 const Actions = styled.div`
   width: 100%;

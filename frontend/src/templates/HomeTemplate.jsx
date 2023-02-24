@@ -19,7 +19,7 @@ const HomeTemplate = () => {
     const [loading, setLoading] = useState(false);
     const auth = useSelector((state) => state.auth);
 
-    const [showButton, setShowButton] = useState(true);
+    const [showButton, setShowButton] = useState(false);
 
 
     useEffect(() => {

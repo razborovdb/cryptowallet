@@ -9,9 +9,10 @@ import {walletsCreateCrypto} from "../slices/WalletsSlice"
 
 const CreateCryptoInWalletTemplate = () => {
     const dispatch = useDispatch();
-    const { createStatus } = useSelector((state) => state.wallets);
+    const { createCryptoStatus } = useSelector((state) => state.wallets);
     const auth = useSelector((state) => state.auth);
     const params = useParams();
+    const {status} = useSelector((state) => state.cryptos);
 
     const [cryptoImg, setCryptoImg] = useState("");
     const [cryptoImgUrl, setCryptoImgUrl] = useState("");
@@ -58,7 +59,7 @@ const CreateCryptoInWalletTemplate = () => {
           })
         );
 
-        navigate(`/edit-wallet/${walletName}`);
+        //navigate(`/edit-wallet/${walletName}`);
 
     };
 
@@ -86,6 +87,9 @@ const CreateCryptoInWalletTemplate = () => {
     };
 
     return (
+      <div>
+        {(status==="pending") ? (<p>Loading...</p>) : 
+        (status==="success") ? (
     <StyledCreateCrypto>
       <CryptoContainer>
       <StyledForm onSubmit={(e) => handleSubmit(e)}>
@@ -132,7 +136,7 @@ const CreateCryptoInWalletTemplate = () => {
         />
 
         <PrimaryButton type="submit">
-          {createStatus === "pending" ? "Submitting" : "Submit"}
+          {createCryptoStatus === "pending" ? "Submitting" : "Submit"}
         </PrimaryButton>
         <div className="back-to-wallet">
           <Link to={`/edit-wallet/${walletName}`}>
@@ -148,24 +152,19 @@ const CreateCryptoInWalletTemplate = () => {
           </Link>
         </div>
       </StyledForm>
-      <ImagePreview>
-        {cryptoImgUrl ? (
-          <>
-            <img src={cryptoImgUrl} alt="error!" />
-          </>
-        ) : (
-          <p>Crypto image will appear here!</p>
-        )}
-      </ImagePreview>
       </CryptoContainer>
     </StyledCreateCrypto>
+    )
+    : (<p>Load Error</p>)
+    }
+    </div>
   );
 }
  
 export default CreateCryptoInWalletTemplate;
 
 const CryptoContainer = styled.div`
-    max-width: 800px;
+    max-width: 330px;
     width: 100%;
     height: auto;
     display: flex;

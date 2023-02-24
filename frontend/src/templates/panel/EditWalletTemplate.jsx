@@ -151,7 +151,7 @@ const EditWalletTemplate = () => {
 
 
       async function fetchData() {
-        setLoading(true);
+        
 
           try {
             const res = await axios.delete(
@@ -173,10 +173,12 @@ const EditWalletTemplate = () => {
               },
             );
 
-                
-            setWallet(res.data);
-            setWalletDescription(res.data.walletDescription);
-            createTable(res.data.cryptocurrenciesList);
+            console.log(res.data);
+
+            toast.success("Crypto: " + res.data.cryptoName + " deleted", {
+              position: "bottom-left",
+            });
+
 
 
 
@@ -184,6 +186,31 @@ const EditWalletTemplate = () => {
         } catch (error) {
           
         }
+        setLoading(true);
+        try {
+          const res = await axios.get(
+              `${url}/wallet`, 
+              {                 
+                headers: setHeaders(auth.token),
+                params: {
+                  email: auth.email,
+                  walletName: params.walletName,
+                },
+              },
+          );
+
+              
+          setWallet(res.data);
+          setWalletDescription(res.data.walletDescription);
+          createTable(res.data.cryptocurrenciesList);
+
+    
+
+
+      } catch (error) {
+        
+      }
+
         setLoading(false);
       };       
     fetchData();

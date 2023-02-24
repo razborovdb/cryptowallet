@@ -339,8 +339,8 @@ const walletsSlice = createSlice({
             return {...state, deleteStatus: "pending"};
         });
         builder.addCase(walletsDelete.fulfilled, (state, action) => {
-            const newList = state.wallets.filter((wallet) => wallet.walletName !== action.payload);
-            toast.success("Wallet: " + action.payload + " deleted", {
+            const newList = state.wallets.filter((wallet) => wallet.walletName !== action.payload.walletName);
+            toast.success("Wallet: " + action.payload.walletName + " deleted", {
                 position: "bottom-left",
             });
             return {

@@ -106,7 +106,7 @@ const EditCryptoInWalletTemplate = () => {
           })
         );
 
-        navigate(`/edit-wallet/${walletName}`);
+        //navigate(`/edit-wallet/${walletName}`);
 
     };
 
@@ -136,6 +136,9 @@ const EditCryptoInWalletTemplate = () => {
     };
 
     return (
+      <div>
+        {loading ? (<p>Loading...</p>) : 
+        
     <StyledCreateCrypto>
       <CryptoContainer>
       <StyledForm onSubmit={(e) => handleSubmit(e)}>
@@ -205,17 +208,12 @@ const EditCryptoInWalletTemplate = () => {
           </Link>
         </div>
       </StyledForm>
-      <ImagePreview>
-        {cryptoImgUrl ? (
-          <>
-            <img src={cryptoImgUrl} alt="error!" />
-          </>
-        ) : (
-          <p>Crypto image will appear here!</p>
-        )}
-      </ImagePreview>
+
       </CryptoContainer>
     </StyledCreateCrypto>
+
+    }
+    </div>
   );
 }
  
@@ -260,23 +258,6 @@ const StyledCreateCrypto = styled.div`
     margin: 3rem;
     display: flex;
     justify-content: center;
-`;
-
-const ImagePreview = styled.div`
-  margin: 2rem 0 2rem 2rem;
-  margin-right: 1rem;
-  padding: 2rem;
-  border: 1px solid rgb(183, 183, 183);
-  max-width: 300px;
-  width: 100%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  padding: 2rem;
-  color: rgb(78, 78, 78);
-  img {
-    max-width: 100%;
-  }
 `;
 
 const PrimaryButton = styled.button`
