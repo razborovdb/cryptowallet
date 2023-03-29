@@ -21,6 +21,7 @@ public interface ServiceComponent {
     LoginUserActivity provideLoginUserActivity();
     GetUserActivity provideGetUserActivity();
     GetAvailableCryptoActivity provideGetAvailableCryptoActivity();
+    UpdateAvailableCryptoActivity provideUpdateAvailableCryptoActivity();
     AddCryptoToAvailableCryptoActivity provideAddCryptoToAvailableCryptoActivity();
     GetCryptoFromAvailableCryptoActivity provideGetCryptoFromAvailableCryptoActivity();
     UpdateCryptoInAvailableCryptoActivity provideUpdateCryptoInAvailableCryptoActivity();

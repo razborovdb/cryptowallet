@@ -10,16 +10,20 @@ repositories {
 }
 
 dependencies {
-    testImplementation 'org.junit.jupiter:junit-jupiter-api:5.8.1'
-    testRuntimeOnly 'org.junit.jupiter:junit-jupiter-engine:5.8.1'
+    testImplementation 'org.junit.jupiter:junit-jupiter-api:5.9.2'
+    testRuntimeOnly 'org.junit.jupiter:junit-jupiter-engine:5.9.2'
 
-    implementation "com.google.dagger:dagger:2.15"
-    annotationProcessor"com.google.dagger:dagger-compiler:2.15"
+    implementation 'com.google.dagger:dagger:2.45'
+    annotationProcessor 'com.google.dagger:dagger-compiler:2.45'
 
-    implementation 'com.amazonaws:aws-java-sdk-dynamodb:1.12.423'
-    implementation 'com.amazonaws:aws-lambda-java-core:1.2.1'
-    implementation 'com.amazonaws:aws-lambda-java-events:2.2.9'
-    runtimeOnly 'com.amazonaws:aws-lambda-java-log4j2:1.2.0'
+    implementation 'com.amazonaws:aws-java-sdk-dynamodb:1.12.429'
+//    implementation 'software.amazon.awssdk:dynamodb:2.20.29'
+//    implementation 'software.amazon.awssdk:dynamodb-enhanced:2.20.29'
+//    implementation 'software.amazon.awssdk:lambda:2.20.29'
+
+    implementation 'com.amazonaws:aws-lambda-java-core:1.2.2'
+    implementation 'com.amazonaws:aws-lambda-java-events:3.11.1'
+    runtimeOnly 'com.amazonaws:aws-lambda-java-log4j2:1.5.1'
 
     implementation 'javax.xml.bind:jaxb-api-osgi:2.2.7'
 

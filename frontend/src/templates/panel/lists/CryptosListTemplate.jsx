@@ -4,7 +4,8 @@ import { DataGrid } from '@mui/x-data-grid';
 import {useDispatch, useSelector} from "react-redux";
 import { useNavigate } from "react-router-dom";
 import EditCryptoTemplate from "../EditCryptoTemplate";
-import { getAllCryptos, cryptosDelete } from "../../slices/CryptoCurrenciesSlice";
+import { getAllCryptos, updateAllCryptos, cryptosDelete } from "../../slices/CryptoCurrenciesSlice";
+import { PrimaryButton } from "../CommonStyled";
 
 
 export default function CryptosListTemplate() {
@@ -13,6 +14,7 @@ export default function CryptosListTemplate() {
     const dispatch = useDispatch();
     const {cryptos} = useSelector((state) => state.cryptos);
     const {status} = useSelector((state) => state.cryptos);
+    const {updateAllStatus} = useSelector((state) => state.cryptos);
   
   
     useEffect(() => {
@@ -82,6 +84,16 @@ export default function CryptosListTemplate() {
         );
     }
 
+    const handleUpdate = () => {
+      dispatch(
+        updateAllCryptos(
+          {
+            token: auth.token
+          }
+        )
+      );
+    }
+
     return (
       <div>
         {(status==="pending") ? (<p>Loading...</p>) : 
@@ -95,6 +107,10 @@ export default function CryptosListTemplate() {
             checkboxSelection
             disableSelectionOnClick
           />
+          <PrimaryButton onClick={() => handleUpdate()} >
+            {updateAllStatus === "pending" ? "Updating" : "Update cryptos cost"}
+
+          </PrimaryButton>
         </div>)
         : (<p>Load Error</p>)
 }

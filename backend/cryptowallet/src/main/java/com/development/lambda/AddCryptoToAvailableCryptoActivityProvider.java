@@ -7,6 +7,7 @@ import com.development.models.requests.AddCryptoToAvailableCryptoRequest;
 import com.development.models.results.AddCryptoToAvailableCryptoResult;
 import com.development.util.DaggerService;
 
+
 public class AddCryptoToAvailableCryptoActivityProvider implements RequestHandler<AddCryptoToAvailableCryptoRequest, AddCryptoToAvailableCryptoResult> {
     @Override
     public AddCryptoToAvailableCryptoResult handleRequest(AddCryptoToAvailableCryptoRequest addCryptoToAvailableCryptoRequest, Context context) {
