@@ -1,5 +1,7 @@
 # Cryptocurrency Wallet Service Design
 
+http://cryptoswallet.s3-website-us-west-2.amazonaws.com
+
 ## Description
 
 This service provides: 

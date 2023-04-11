@@ -16,6 +16,7 @@ import java.util.List;
 import java.util.Map;
 
 public class CryptoDao {
+
     private final DynamoDBMapper dynamoDbMapper;
 
     @Inject
