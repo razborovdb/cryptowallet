@@ -1,0 +1,1132 @@
+openapi: 3.0.3
+info:
+  title: CryptoWallet
+  version: 1.0.0
+security:
+  - apiKeyAuth: []
+servers:
+  - url:  https://099ihs2ib0.execute-api.us-west-2.amazonaws.com/prod
+    description: Production server
+
+paths:
+  /api/project:
+    get:
+      description: "This is used to get information about project"
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/Projects"
+                example: {
+                    "projectname": "CryptoWallet",
+                    "image": "",
+                    "imageUrl": "",
+                    "projectDescription": "This is CryptoWallet Project",
+                    "projectCost": 0.0
+                }
+        "400":
+          description: "Invalid inputs"
+          content:
+            application/json:
+              schema:
+                type: object
+                items:
+                  $ref: "#/components/schemas/Error"
+                example: {
+                  code: 400,
+                  error: "Invalid inputs"
+                }
+        "500":
+          description: "Server error"
+          content:
+            application/json:
+              schema:
+                type: object
+                items:
+                  $ref: "#/components/schemas/Error"
+                example: {
+                  code: 500,
+                  error: "Server error"
+                }
+  /api/user/register:
+    post:
+      description: "This is used to register user in the CryptoWallet application"
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Users'
+            example: {
+              "email": "newuser@newuser.com",
+              "name": "newuser",
+              "avatar": "",
+              "avatarurl": "",
+              "password": "12345",
+              "role": "user",
+              "isAdmin": false
+            }
+
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/Token"
+                example: {
+                    "token": "zxsfASDFasdfDFsdcvSDFSDFEDFVASDFG"
+                  }
+
+        "400":
+          description: "Invalid inputs"
+          content:
+            application/json:
+              schema:
+                type: object
+                items:
+                  $ref: "#/components/schemas/Error"
+                example: {
+                  code: 400,
+                  error: "Invalid inputs"
+                }
+        "500":
+          description: "Server error"
+          content:
+            application/json:
+              schema:
+                type: object
+                items:
+                  $ref: "#/components/schemas/Error"
+                example: {
+                  code: 500,
+                  error: "Server error"
+                }
+  /api/user/login:
+    post:
+      description: "This is used to login to the CryptoWallet application"
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UserLogin'
+            example: {
+              "email": "user@user.com",
+              "password": "password"
+            }
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/Token"
+                example: {
+                    "token": "zxsfASDFasdfDFsdcvSDFSDFEDFVASDFG"
+                  }
+
+        "400":
+          description: "Invalid inputs"
+          content:
+            application/json:
+              schema:
+                type: object
+                items:
+                  $ref: "#/components/schemas/Error"
+                example: {
+                  code: 400,
+                  error: "Invalid inputs"
+                }
+        "500":
+          description: "Server error"
+          content:
+            application/json:
+              schema:
+                type: object
+                items:
+                  $ref: "#/components/schemas/Error"
+                example: {
+                  code: 500,
+                  error: "Server error"
+                }
+  /api/user:
+    get:
+      description: "This is used to get user's information"
+      parameters:
+        - name: email
+          in: query
+          required: true
+          schema: 
+            type: string
+            example: "newuser@newuser.com"
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/Users"
+                example: {
+                  "email": "newuser@newuser.com",
+                  "name": "newuser",
+                  "avatar": "",
+                  "avatarurl": "",
+                  "password": "12345",
+                  "role": "user",
+                  "isAdmin": false
+                }
+
+        "400":
+          description: "Invalid inputs"
+          content:
+            application/json:
+              schema:
+                type: object
+                items:
+                  $ref: "#/components/schemas/Error"
+                example: {
+                  code: 400,
+                  error: "Invalid inputs"
+                }
+        "500":
+          description: "Server error"
+          content:
+            application/json:
+              schema:
+                type: object
+                items:
+                  $ref: "#/components/schemas/Error"
+                example: {
+                  code: 500,
+                  error: "Server error"
+                }
+  /api/cryptos:
+    get:
+      description: "This returns the list of available cryptocurrencies"
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/Cryptocurrency"
+                example: [
+                  {
+                    "cryptoName": "ETH",
+                    "image": "",
+                    "imageUrl": "",
+                    "cryptoDescription": "Ethereum",
+                    "cryptoAmount": 1,
+                    "cryptoCost": 1609.16
+                  },
+                  {
+                    "cryptoName": "BTC",
+                    "image": "",
+                    "imageUrl": "",
+                    "cryptoDescription": "Bitcoin",
+                    "cryptoAmount": 1,
+                    "cryptoCost": 20618.34
+                  },
+                  {
+                    "cryptoName": "ETC",
+                    "image": "",
+                    "imageUrl": "",
+                    "cryptoDescription": "Ethereum Classic",
+                    "cryptoAmount": 1,
+                    "cryptoCost": 36.118
+                  },
+                  {
+                    "cryptoName": "LTC",
+                    "image": "",
+                    "imageUrl": "",
+                    "cryptoDescription": "Litecoin",
+                    "cryptoAmount": 1,
+                    "cryptoCost": 61.045
+                  }
+                ]
+
+        "400":
+          description: "Invalid inputs"
+          content:
+            application/json:
+              schema:
+                type: object
+                items:
+                  $ref: "#/components/schemas/Error"
+                example: {
+                  code: 400,
+                  error: "Invalid inputs"
+                }
+        "500":
+          description: "Server error"
+          content:
+            application/json:
+              schema:
+                type: object
+                items:
+                  $ref: "#/components/schemas/Error"
+                example: {
+                  code: 500,
+                  error: "Server error"
+                }
+  /api/crypto:
+    post:
+      description: "This adds crypto to the list of available cryptocurrencies"
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Cryptocurrency'
+            example: {
+              "cryptoName": "ETH2",
+              "image": "",
+              "imageUrl": "",
+              "cryptoDescription": "Ethereum",
+              "cryptoAmount": 1,
+              "cryptoCost": 1609.16
+            }
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/Cryptocurrency"
+                example: {
+                    "cryptoName": "ETH2",
+                    "image": "",
+                    "imageUrl": "",
+                    "cryptoDescription": "Ethereum",
+                    "cryptoAmount": 1,
+                    "cryptoCost": 1609.16
+                  }
+        "400":
+          description: "Invalid inputs"
+          content:
+            application/json:
+              schema:
+                type: object
+                items:
+                  $ref: "#/components/schemas/Error"
+                example: {
+                  code: 400,
+                  error: "Invalid inputs"
+                }
+        "500":
+          description: "Server error"
+          content:
+            application/json:
+              schema:
+                type: object
+                items:
+                  $ref: "#/components/schemas/Error"
+                example: {
+                  code: 500,
+                  error: "Server error"
+                }
+    put:
+      description: "This updates crypto in the list of available cryptocurrencies"
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Cryptocurrency'
+            example: {
+              "cryptoName": "ETH2",
+              "image": "",
+              "imageUrl": "",
+              "cryptoDescription": "Ethereum",
+              "cryptoAmount": 1,
+              "cryptoCost": 1709.16
+            }
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/Cryptocurrency"
+                example: {
+                    "cryptoName": "ETH2",
+                    "image": "",
+                    "imageUrl": "",
+                    "cryptoDescription": "Ethereum",
+                    "cryptoAmount": 1,
+                    "cryptoCost": 1709.16
+                  }
+        "400":
+          description: "Invalid inputs"
+          content:
+            application/json:
+              schema:
+                type: object
+                items:
+                  $ref: "#/components/schemas/Error"
+                example: {
+                  code: 400,
+                  error: "Invalid inputs"
+                }
+        "500":
+          description: "Server error"
+          content:
+            application/json:
+              schema:
+                type: object
+                items:
+                  $ref: "#/components/schemas/Error"
+                example: {
+                  code: 500,
+                  error: "Server error"
+                }
+    get:
+      description: "This gets crypto from the list of available cryptocurrencies"
+      parameters:
+        - name: cryptoName
+          in: query
+          required: true
+          schema: 
+            type: string
+            example: "ETH2"
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/Cryptocurrency"
+                example: {
+                    "cryptoName": "ETH2",
+                    "image": "",
+                    "imageUrl": "",
+                    "cryptoDescription": "Ethereum",
+                    "cryptoAmount": 1,
+                    "cryptoCost": 1709.16
+                  }
+        "400":
+          description: "Invalid inputs"
+          content:
+            application/json:
+              schema:
+                type: object
+                items:
+                  $ref: "#/components/schemas/Error"
+                example: {
+                  code: 400,
+                  error: "Invalid inputs"
+                }
+        "500":
+          description: "Server error"
+          content:
+            application/json:
+              schema:
+                type: object
+                items:
+                  $ref: "#/components/schemas/Error"
+                example: {
+                  code: 500,
+                  error: "Server error"
+                }
+    delete:
+      description: "This deletes crypto from the list of available cryptocurrencies"
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Cryptocurrency'
+            example: {
+              "cryptoName": "ETH2",
+              "image": "",
+              "imageUrl": "",
+              "cryptoDescription": "Ethereum",
+              "cryptoAmount": 1,
+              "cryptoCost": 1609.16
+            }
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/Cryptocurrency"
+                example: {
+                    "cryptoName": "ETH2"
+                  }
+        "400":
+          description: "Invalid inputs"
+          content:
+            application/json:
+              schema:
+                type: object
+                items:
+                  $ref: "#/components/schemas/Error"
+                example: {
+                  code: 400,
+                  error: "Invalid inputs"
+                }
+        "500":
+          description: "Server error"
+          content:
+            application/json:
+              schema:
+                type: object
+                items:
+                  $ref: "#/components/schemas/Error"
+                example: {
+                  code: 500,
+                  error: "Server error"
+                }
+  /api/wallets:
+    get:
+      description: "This gets user wallets"
+      parameters:
+        - name: email
+          in: query
+          required: true
+          schema: 
+            type: string
+            example: "user@user.com"
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/Wallet"
+                example: {
+                  "walletList": [
+                    {
+                      "userId": "user@user.com",
+                      "walletName": "wallet1",
+                      "walletDescription": "wallet1 description",
+                      "cryptosCount": 4,
+                      "cryptosCost": 231144,
+                      "cryptocurrenciesList": [
+                        {
+                          "cryptoName": "LTC2",
+                          "cryptoType": "LTC",
+                          "cryptoDescription": "LTC1 description",
+                          "cryptoAmount": 0,
+                          "cryptoCost": 0
+                        },
+                        {
+                          "cryptoName": "BTC1",
+                          "cryptoType": "BTC",
+                          "cryptoDescription": "BTC1 description",
+                          "cryptoAmount": 10,
+                          "cryptoCost": 302373.78878
+                        }
+                      ]
+                    },
+                    {
+                      "userId": "user@user.com",
+                      "walletName": "wallet3",
+                      "walletDescription": "wallet3 description",
+                      "cryptosCount": 0,
+                      "cryptosCost": 0,
+                      "cryptocurrenciesList": []
+                    }
+                  ]
+                }
+        "400":
+          description: "Invalid inputs"
+          content:
+            application/json:
+              schema:
+                type: object
+                items:
+                  $ref: "#/components/schemas/Error"
+                example: {
+                  code: 400,
+                  error: "Invalid inputs"
+                }
+        "500":
+          description: "Server error"
+          content:
+            application/json:
+              schema:
+                type: object
+                items:
+                  $ref: "#/components/schemas/Error"
+                example: {
+                  code: 500,
+                  error: "Server error"
+                }
+  /api/wallet:
+    post:
+      description: "This is used to create a new user cryptocurrency wallet"
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Wallet'
+            example: {
+              "userId": "user@user.com",
+              "walletName": "wallet1",
+              "walletDescription": "wallet1 description",
+              "cryptosCount": 0,
+              "cryptosCost": 0,
+              "cryptocurrenciesList": []
+            }
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                items:
+                  $ref: "#/components/schemas/Wallet"
+                example: {
+                  "userId": "user@user.com",
+                  "walletName": "wallet1",
+                  "walletDescription": "wallet1 description",
+                  "cryptosCount": 0,
+                  "cryptosCost": 0,
+                  "cryptocurrenciesList": []
+                }
+        "400":
+          description: "Invalid inputs"
+          content:
+            application/json:
+              schema:
+                type: object
+                items:
+                  $ref: "#/components/schemas/Error"
+                example: {
+                  code: 400,
+                  error: "Invalid inputs"
+                }
+        "500":
+          description: "Server error"
+          content:
+            application/json:
+              schema:
+                type: object
+                items:
+                  $ref: "#/components/schemas/Error"
+                example: {
+                  code: 500,
+                  error: "Server error"
+                }
+    get:
+      description: "This is used to get a user's wallet"
+      parameters:
+        - name: email
+          in: query
+          required: true
+          schema: 
+            type: string
+            example: "user@user.com"
+        - name: walletName
+          in: query
+          required: true
+          schema: 
+            type: string
+            example: "wallet1"
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                items:
+                  $ref: "#/components/schemas/Wallet"
+                example: {
+                  "userId": "user@user.com",
+                  "walletName": "wallet1",
+                  "walletDescription": "wallet1 description",
+                  "cryptosCount": 0,
+                  "cryptosCost": 0,
+                  "cryptocurrenciesList": []
+                }
+        "400":
+          description: "Invalid inputs"
+          content:
+            application/json:
+              schema:
+                type: object
+                items:
+                  $ref: "#/components/schemas/Error"
+                example: {
+                  code: 400,
+                  error: "Invalid inputs"
+                }
+        "500":
+          description: "Server error"
+          content:
+            application/json:
+              schema:
+                type: object
+                items:
+                  $ref: "#/components/schemas/Error"
+                example: {
+                  code: 500,
+                  error: "Server error"
+                }
+    delete:
+      description: "This deletes a user's wallet"
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Wallet'
+            example: {
+              "userId": "user@user.com",
+              "walletName": "wallet1",
+              "walletDescription": "wallet1 new description",
+              "cryptosCount": 0,
+              "cryptosCost": 0,
+              "cryptocurrenciesList": []
+            }
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                example: {
+                  "walletName": "wallet1"
+                }
+        "400":
+          description: "Invalid inputs"
+          content:
+            application/json:
+              schema:
+                type: object
+                items:
+                  $ref: "#/components/schemas/Error"
+                example: {
+                  code: 400,
+                  error: "Invalid inputs"
+                }
+        "500":
+          description: "Server error"
+          content:
+            application/json:
+              schema:
+                type: object
+                items:
+                  $ref: "#/components/schemas/Error"
+                example: {
+                  code: 500,
+                  error: "Server error"
+                }
+    put:
+      description: "This is used to update user's wallet"
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Wallet'
+            example: {
+              "userId": "user@user.com",
+              "walletName": "wallet1",
+              "walletDescription": "wallet1 new description",
+              "cryptosCount": 0,
+              "cryptosCost": 0,
+              "cryptocurrenciesList": []
+            }
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                items:
+                  $ref: "#/components/schemas/Wallet"
+                example: {
+                  "userId": "user@user.com",
+                  "walletName": "wallet1",
+                  "walletDescription": "wallet1 new description",
+                  "cryptosCount": 0,
+                  "cryptosCost": 0,
+                  "cryptocurrenciesList": []
+                }
+        "400":
+          description: "Invalid inputs"
+          content:
+            application/json:
+              schema:
+                type: object
+                items:
+                  $ref: "#/components/schemas/Error"
+                example: {
+                  code: 400,
+                  error: "Invalid inputs"
+                }
+        "500":
+          description: "Server error"
+          content:
+            application/json:
+              schema:
+                type: object
+                items:
+                  $ref: "#/components/schemas/Error"
+                example: {
+                  code: 500,
+                  error: "Server error"
+                }
+  /api/wallet/crypto:
+    post:
+      description: "This is used to add a new cryptocurrency to user's wallet"
+      
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/AddCryptoToWallet'
+            example: {
+              "userId": "user@user.com",
+              "walletName": "wallet1",
+              "cryptoName": "ETC2",
+              "cryptoType": "ETC",
+              "image": "",
+              "imageUrl": "",
+              "cryptoDescription": "RobinHood",
+              "cryptoAmount": 2,
+              "cryptoCost": 0
+            }
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                items:
+                  $ref: "#/components/schemas/Wallet"
+                example: {
+                  "userId": "user@user.com",
+                  "walletName": "wallet1",
+                  "walletDescription": "wallet1 description",
+                  "cryptosCount": 1,
+                  "cryptosCost": 43.342,
+                  "cryptocurrenciesList": [
+                    {
+                      "cryptoName": "ETC2",
+                      "cryptoType": "ETC",
+                      "cryptoDescription": "RobinHood",
+                      "cryptoAmount": 2,
+                      "cryptoCost": 43.342
+                    }
+                  ]
+                }
+
+        "400":
+          description: "Invalid inputs"
+          content:
+            application/json:
+              schema:
+                type: object
+                items:
+                  $ref: "#/components/schemas/Error"
+                example: {
+                  code: 400,
+                  error: "Invalid inputs"
+                }
+        "500":
+          description: "Server error"
+          content:
+            application/json:
+              schema:
+                type: object
+                items:
+                  $ref: "#/components/schemas/Error"
+                example: {
+                  code: 500,
+                  error: "Server error"
+                }
+    put:
+      description: "This is used to update a cryptocurrency in user's wallet"
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/AddCryptoToWallet'
+            example: {
+              "userId": "user@user.com",
+              "walletName": "wallet1",
+              "cryptoName": "ETC2",
+              "cryptoType": "ETC",
+              "image": "",
+              "imageUrl": "",
+              "cryptoDescription": "RobinHood new",
+              "cryptoAmount": 5,
+              "cryptoCost": 0
+            }
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                items:
+                  $ref: "#/components/schemas/Wallet"
+                example: {
+                  "userId": "user@user.com",
+                  "walletName": "wallet1",
+                  "walletDescription": "wallet1 description",
+                  "cryptosCount": 2,
+                  "cryptosCost": 151.697,
+                  "cryptocurrenciesList": [
+                    {
+                      "cryptoName": "ETC2",
+                      "cryptoType": "ETC",
+                      "cryptoDescription": "RobinHood new",
+                      "cryptoAmount": 5,
+                      "cryptoCost": 108.35499999999999
+                    }
+                  ]
+                }
+
+        "400":
+          description: "Invalid inputs"
+          content:
+            application/json:
+              schema:
+                type: object
+                items:
+                  $ref: "#/components/schemas/Error"
+                example: {
+                  code: 400,
+                  error: "Invalid inputs"
+                }
+        "500":
+          description: "Server error"
+          content:
+            application/json:
+              schema:
+                type: object
+                items:
+                  $ref: "#/components/schemas/Error"
+                example: {
+                  code: 500,
+                  error: "Server error"
+                }
+    delete:
+      description: "This is used to delete a cryptocurrency from user's wallet"
+      
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/AddCryptoToWallet'
+            example: {
+              "userId": "user@user.com",
+              "walletName": "wallet1",
+              "cryptoName": "ETC2",
+              "cryptoType": "ETC",
+              "image": "",
+              "imageUrl": "",
+              "cryptoDescription": "RobinHood",
+              "cryptoAmount": 2,
+              "cryptoCost": 0
+            }
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                example: {
+                  "cryptoName": "ETC2",
+                }
+        "400":
+          description: "Invalid inputs"
+          content:
+            application/json:
+              schema:
+                type: object
+                items:
+                  $ref: "#/components/schemas/Error"
+                example: {
+                  code: 400,
+                  error: "Invalid inputs"
+                }
+        "500":
+          description: "Server error"
+          content:
+            application/json:
+              schema:
+                type: object
+                items:
+                  $ref: "#/components/schemas/Error"
+                example: {
+                  code: 500,
+                  error: "Server error"
+                }
+components:
+  securitySchemes:
+    apiKeyAuth:
+      type: apiKey
+      in: header
+      name: token
+  schemas:
+    CryptoBody:
+      type: object
+      properties:
+        cryptoDescription:
+          type: string
+        cryptoAmount:
+          type: number
+    WalletDescription:
+      type: object
+      properties:
+        walletDescription:
+          type: string
+    Projects:
+      type: object
+      properties:
+        projectName:
+          type: string
+        image:
+          type: string
+        imageUrl:
+          type: string
+        projectDescription:
+          type: string
+        projectCost:
+          type: number
+    UserLogin:
+      type: object
+      properties:
+        email:
+          type: string
+        password:
+          type: string
+    Users:
+      type: object
+      properties:
+        email:
+          type: string
+        name:
+          type: string
+        avatar:
+          type: string
+        avatarUrl:
+          type: string
+        password:
+          type: string
+        role:
+          type: string
+        isadmin:
+          type: boolean
+    Token:
+      type: object
+      properties:
+        token:
+          type: string
+    Cryptocurrency:
+      type: object
+      properties:
+        cryptoName:
+          type: string
+        image:
+          type: string
+        imageUrl:
+          type: string
+        cryptoDescription:
+          type: string
+        cryptoAmount:
+          type: number
+        cryptoCost:
+          type: number
+    AddCryptoToWallet:
+      type: object
+      properties:
+        userId:
+          type: string
+        walletName:
+          type: string
+        cryptoName:
+          type: string
+        cryptoType:
+          type: string
+        image:
+          type: string
+        imageUrl:
+          type: string
+        cryptoDescription:
+          type: string
+        cryptoAmount:
+          type: number
+        cryptoCost:
+          type: number
+    CryptoInWallet:
+      type: object
+      properties:
+        cryptoName:
+          type: string
+        cryptoType:
+          type: string
+        image:
+          type: string
+        imageUrl:
+          type: string
+        cryptoDescription:
+          type: string
+        cryptoAmount:
+          type: number
+        cryptoCost:
+          type: number
+    Wallet:
+      type: object
+      properties:
+        userId: 
+          type: string
+        walletName:
+          type: string
+        walletDescription:
+          type: string
+        cryptosCount:
+          type: number
+        cryptosCost: 
+          type: number
+        cryptocurrenciesList:
+          type: array
+          items:
+            $ref: "#/components/schemas/CryptoInWallet"
+    Error:
+      type: object
+      properties:
+        code: 
+          type: number
+        error:
+          type: string

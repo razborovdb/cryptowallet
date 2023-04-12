@@ -15,6 +15,7 @@ import com.development.activity.GetUserActivity;
 import com.development.activity.GetUserOneWalletActivity;
 import com.development.activity.GetUserWalletActivity;
 import com.development.activity.LoginUserActivity;
+import com.development.activity.UpdateAvailableCryptoActivity;
 import com.development.activity.UpdateCryptoInAvailableCryptoActivity;
 import com.development.activity.UpdateCryptoInWalletActivity;
 import com.development.activity.UpdateWalletActivity;
@@ -22,20 +23,25 @@ import com.development.dynamodb.CryptoDao;
 import com.development.dynamodb.ProjectsDao;
 import com.development.dynamodb.UsersDao;
 import com.development.dynamodb.WalletDao;
+import dagger.internal.DaggerGenerated;
 import dagger.internal.DoubleCheck;
 import dagger.internal.Preconditions;
 import javax.annotation.processing.Generated;
 import javax.inject.Provider;
 
+@DaggerGenerated
 @Generated(
-  value = "dagger.internal.codegen.ComponentProcessor",
-  comments = "https://google.github.io/dagger"
+    value = "dagger.internal.codegen.ComponentProcessor",
+    comments = "https://dagger.dev"
 )
-public final class DaggerServiceComponent implements ServiceComponent {
-  private Provider<DynamoDBMapper> provideDynamoDBMapperProvider;
-
-  private DaggerServiceComponent(Builder builder) {
-    initialize(builder);
+@SuppressWarnings({
+    "unchecked",
+    "rawtypes",
+    "KotlinInternal",
+    "KotlinInternalInJava"
+})
+public final class DaggerServiceComponent {
+  private DaggerServiceComponent() {
   }
 
   public static Builder builder() {
@@ -46,128 +52,145 @@ public final class DaggerServiceComponent implements ServiceComponent {
     return new Builder().build();
   }
 
-  private ProjectsDao getProjectsDao() {
-    return new ProjectsDao(provideDynamoDBMapperProvider.get());
-  }
-
-  private UsersDao getUsersDao() {
-    return new UsersDao(provideDynamoDBMapperProvider.get());
-  }
-
-  private CryptoDao getCryptoDao() {
-    return new CryptoDao(provideDynamoDBMapperProvider.get());
-  }
-
-  private WalletDao getWalletDao() {
-    return new WalletDao(provideDynamoDBMapperProvider.get());
-  }
-
-  @SuppressWarnings("unchecked")
-  private void initialize(final Builder builder) {
-    this.provideDynamoDBMapperProvider =
-        DoubleCheck.provider(DaoModule_ProvideDynamoDBMapperFactory.create(builder.daoModule));
-  }
-
-  @Override
-  public GetProjectsActivity provideGetProjectsActivity() {
-    return new GetProjectsActivity(getProjectsDao());
-  }
-
-  @Override
-  public CreateUserActivity provideCreateUserActivity() {
-    return new CreateUserActivity(getUsersDao());
-  }
-
-  @Override
-  public LoginUserActivity provideLoginUserActivity() {
-    return new LoginUserActivity(getUsersDao());
-  }
-
-  @Override
-  public GetUserActivity provideGetUserActivity() {
-    return new GetUserActivity(getUsersDao());
-  }
-
-  @Override
-  public GetAvailableCryptoActivity provideGetAvailableCryptoActivity() {
-    return new GetAvailableCryptoActivity(getCryptoDao(), getUsersDao());
-  }
-
-  @Override
-  public AddCryptoToAvailableCryptoActivity provideAddCryptoToAvailableCryptoActivity() {
-    return new AddCryptoToAvailableCryptoActivity(getUsersDao(), getCryptoDao());
-  }
-
-  @Override
-  public GetCryptoFromAvailableCryptoActivity provideGetCryptoFromAvailableCryptoActivity() {
-    return new GetCryptoFromAvailableCryptoActivity(getUsersDao(), getCryptoDao());
-  }
-
-  @Override
-  public UpdateCryptoInAvailableCryptoActivity provideUpdateCryptoInAvailableCryptoActivity() {
-    return new UpdateCryptoInAvailableCryptoActivity(getUsersDao(), getCryptoDao());
-  }
-
-  @Override
-  public DeleteCryptoInAvailableCryptoActivity provideDeleteCryptoInAvailableCryptoActivity() {
-    return new DeleteCryptoInAvailableCryptoActivity(getUsersDao(), getCryptoDao());
-  }
-
-  @Override
-  public AddWalletActivity provideAddWalletActivity() {
-    return new AddWalletActivity(getUsersDao(), getWalletDao(), getCryptoDao());
-  }
-
-  @Override
-  public GetUserWalletActivity provideGetUserWalletActivity() {
-    return new GetUserWalletActivity(getUsersDao(), getWalletDao(), getCryptoDao());
-  }
-
-  @Override
-  public GetUserOneWalletActivity provideGetUserOneWalletActivity() {
-    return new GetUserOneWalletActivity(getUsersDao(), getWalletDao());
-  }
-
-  @Override
-  public DeleteUserWalletActivity provideDeleteUserWalletActivity() {
-    return new DeleteUserWalletActivity(getUsersDao(), getWalletDao());
-  }
-
-  @Override
-  public UpdateWalletActivity provideUpdateWalletActivity() {
-    return new UpdateWalletActivity(getUsersDao(), getWalletDao(), getCryptoDao());
-  }
-
-  @Override
-  public AddCryptoToWalletActivity provideAddCryptoToWalletActivity() {
-    return new AddCryptoToWalletActivity(getUsersDao(), getWalletDao(), getCryptoDao());
-  }
-
-  @Override
-  public UpdateCryptoInWalletActivity provideUpdateCryptoInWalletActivity() {
-    return new UpdateCryptoInWalletActivity(getUsersDao(), getWalletDao(), getCryptoDao());
-  }
-
-  @Override
-  public DeleteCryptoInWalletActivity provideDeleteCryptoInWalletActivity() {
-    return new DeleteCryptoInWalletActivity(getUsersDao(), getWalletDao(), getCryptoDao());
-  }
-
   public static final class Builder {
     private DaoModule daoModule;
 
-    private Builder() {}
-
-    public ServiceComponent build() {
-      if (daoModule == null) {
-        this.daoModule = new DaoModule();
-      }
-      return new DaggerServiceComponent(this);
+    private Builder() {
     }
 
     public Builder daoModule(DaoModule daoModule) {
       this.daoModule = Preconditions.checkNotNull(daoModule);
       return this;
+    }
+
+    public ServiceComponent build() {
+      if (daoModule == null) {
+        this.daoModule = new DaoModule();
+      }
+      return new ServiceComponentImpl(daoModule);
+    }
+  }
+
+  private static final class ServiceComponentImpl implements ServiceComponent {
+    private final ServiceComponentImpl serviceComponentImpl = this;
+
+    private Provider<DynamoDBMapper> provideDynamoDBMapperProvider;
+
+    private ServiceComponentImpl(DaoModule daoModuleParam) {
+
+      initialize(daoModuleParam);
+
+    }
+
+    private ProjectsDao projectsDao() {
+      return new ProjectsDao(provideDynamoDBMapperProvider.get());
+    }
+
+    private UsersDao usersDao() {
+      return new UsersDao(provideDynamoDBMapperProvider.get());
+    }
+
+    private CryptoDao cryptoDao() {
+      return new CryptoDao(provideDynamoDBMapperProvider.get());
+    }
+
+    private WalletDao walletDao() {
+      return new WalletDao(provideDynamoDBMapperProvider.get());
+    }
+
+    @SuppressWarnings("unchecked")
+    private void initialize(final DaoModule daoModuleParam) {
+      this.provideDynamoDBMapperProvider = DoubleCheck.provider(DaoModule_ProvideDynamoDBMapperFactory.create(daoModuleParam));
+    }
+
+    @Override
+    public GetProjectsActivity provideGetProjectsActivity() {
+      return new GetProjectsActivity(projectsDao());
+    }
+
+    @Override
+    public CreateUserActivity provideCreateUserActivity() {
+      return new CreateUserActivity(usersDao());
+    }
+
+    @Override
+    public LoginUserActivity provideLoginUserActivity() {
+      return new LoginUserActivity(usersDao());
+    }
+
+    @Override
+    public GetUserActivity provideGetUserActivity() {
+      return new GetUserActivity(usersDao());
+    }
+
+    @Override
+    public GetAvailableCryptoActivity provideGetAvailableCryptoActivity() {
+      return new GetAvailableCryptoActivity(cryptoDao(), usersDao());
+    }
+
+    @Override
+    public UpdateAvailableCryptoActivity provideUpdateAvailableCryptoActivity() {
+      return new UpdateAvailableCryptoActivity(cryptoDao(), usersDao());
+    }
+
+    @Override
+    public AddCryptoToAvailableCryptoActivity provideAddCryptoToAvailableCryptoActivity() {
+      return new AddCryptoToAvailableCryptoActivity(usersDao(), cryptoDao());
+    }
+
+    @Override
+    public GetCryptoFromAvailableCryptoActivity provideGetCryptoFromAvailableCryptoActivity() {
+      return new GetCryptoFromAvailableCryptoActivity(usersDao(), cryptoDao());
+    }
+
+    @Override
+    public UpdateCryptoInAvailableCryptoActivity provideUpdateCryptoInAvailableCryptoActivity() {
+      return new UpdateCryptoInAvailableCryptoActivity(usersDao(), cryptoDao());
+    }
+
+    @Override
+    public DeleteCryptoInAvailableCryptoActivity provideDeleteCryptoInAvailableCryptoActivity() {
+      return new DeleteCryptoInAvailableCryptoActivity(usersDao(), cryptoDao());
+    }
+
+    @Override
+    public AddWalletActivity provideAddWalletActivity() {
+      return new AddWalletActivity(usersDao(), walletDao(), cryptoDao());
+    }
+
+    @Override
+    public GetUserWalletActivity provideGetUserWalletActivity() {
+      return new GetUserWalletActivity(usersDao(), walletDao(), cryptoDao());
+    }
+
+    @Override
+    public GetUserOneWalletActivity provideGetUserOneWalletActivity() {
+      return new GetUserOneWalletActivity(usersDao(), walletDao());
+    }
+
+    @Override
+    public DeleteUserWalletActivity provideDeleteUserWalletActivity() {
+      return new DeleteUserWalletActivity(usersDao(), walletDao());
+    }
+
+    @Override
+    public UpdateWalletActivity provideUpdateWalletActivity() {
+      return new UpdateWalletActivity(usersDao(), walletDao(), cryptoDao());
+    }
+
+    @Override
+    public AddCryptoToWalletActivity provideAddCryptoToWalletActivity() {
+      return new AddCryptoToWalletActivity(usersDao(), walletDao(), cryptoDao());
+    }
+
+    @Override
+    public UpdateCryptoInWalletActivity provideUpdateCryptoInWalletActivity() {
+      return new UpdateCryptoInWalletActivity(usersDao(), walletDao(), cryptoDao());
+    }
+
+    @Override
+    public DeleteCryptoInWalletActivity provideDeleteCryptoInWalletActivity() {
+      return new DeleteCryptoInWalletActivity(usersDao(), walletDao(), cryptoDao());
     }
   }
 }

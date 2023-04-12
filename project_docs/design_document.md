@@ -1,5 +1,7 @@
 # Cryptocurrency Wallet Service Design
 
+http://cryptoswallet.s3-website-us-west-2.amazonaws.com
+
 ## Description
 
 This service provides: 
@@ -220,17 +222,17 @@ Double paymentDate;
 ## 6.13. AddCryptoToUserWallet Endpoint (made)
 
 * Accepts `POST` requests to `/api/wallet/crypto`
-* Accepts token, walletName as path variable and CryptoCurrencies with all parameters returns Wallet.
+* Accepts token, userId, walletName, CryptoCurrencies with all parameters in the request body returns user's Wallet.
 
 ## 6.14. UpdateCryptoInUserWallet Endpoint (made)
 
 * Accepts `PUT` requests to `/api/wallet/crypto`
-* Accepts token, walletName as path variable and CryptoCurrencies with all parameters returns CryptoCurrencies.
+* Accepts token, userId, walletName, CryptoCurrencies with all parameters in the request body returns user's Wallet.
 
 ## 6.15. DeleteCryptoInUserWallet Endpoint
 
 * Accepts `DELETE` requests to `/api/wallet/crypto`
-* Accepts token, walletName as path variable and CryptoCurrencies with all parameters returns cryptoName.
+* Accepts token, userId, walletName, CryptoCurrencies with all parameters in the request body returns cryptoName.
 
 
 ## 6.16. GetUser Endpoint (made)
