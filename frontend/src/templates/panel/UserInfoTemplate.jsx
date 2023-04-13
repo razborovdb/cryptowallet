@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { useNavigate} from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
 import 'react-toastify/dist/ReactToastify.css';
 
@@ -26,48 +26,53 @@ const UserInfoTemplate = () => {
 
         async function fetchData() {
             setLoading(true);
-  
-              try {
+
+            try {
                 const res = await axios.get(
-                    `${url}/user`, 
-                    {                 
-                      headers: setHeaders(auth.token),
-                      params: {
-                        email: auth.email,
-                      },
+                    `${url}/user`,
+                    {
+                        headers: setHeaders(auth.token),
+                        params: {
+                            email: auth.email,
+                        },
                     },
                 );
 
- 
-  
-                    setUser(res.data);
-  
+
+
+                setUser(res.data);
+
             } catch (error) {
 
             }
             setLoading(false);
 
-          };       
+        };
         fetchData();
     }, []);
 
+    const handleEdit = () => {
+        navigate(`/edit-user`);
+    }
+
+
     return (
-    <div className="user-container">
-        {loading ? (<p>Loading...</p>) :
-            <div>
-                <h2>User Info</h2>
-                <div className="users">
-                    
-                    <div className="user">
-                        <div className="details">
-                            <p><span>User email:</span> {user.email} </p>
+        <div className="user-container">
+            {loading ? (<p>Loading...</p>) :
+                <div>
+                    <h2>User Info</h2>
+                    <div className="users">
+
+                        <div className="user">
+                            <h3>{user.name}</h3>
+                            <img src={user.avatarUrl} alt={user.name} />
+                            <h2>{user.email}</h2>
+                            <button onClick={() => handleEdit()}>Edit</button>
                         </div>
-                        <p><span>User name:</span> {user.name} </p>
                     </div>
                 </div>
-            </div>
-        }
-    </div>
+            }
+        </div>
     );
 }
 

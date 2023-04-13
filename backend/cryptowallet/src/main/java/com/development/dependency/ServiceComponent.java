@@ -18,6 +18,7 @@ public interface ServiceComponent {
     GetProjectsActivity provideGetProjectsActivity();
 
     CreateUserActivity provideCreateUserActivity();
+    UpdateUserActivity provideUpdateUserActivity();
     LoginUserActivity provideLoginUserActivity();
     GetUserActivity provideGetUserActivity();
     GetAvailableCryptoActivity provideGetAvailableCryptoActivity();
