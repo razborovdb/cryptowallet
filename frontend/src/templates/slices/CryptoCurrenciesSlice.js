@@ -29,7 +29,7 @@ export const getAllCryptos = createAsyncThunk(
                 headers: setHeaders(values.token)
             }
             );
-
+            
             return cryptosList?.data.cryptocurrencyList;
         } catch(err) {
             return rejectWithValue(err.response.data);
@@ -41,7 +41,6 @@ export const updateAllCryptos = createAsyncThunk(
   "cryptos/updateAllCryptos",
   async (values, { rejectWithValue }) => {
 
-    console.log("here");
     
     try {
 
@@ -101,6 +100,7 @@ export const cryptosDelete = createAsyncThunk(
     async (values, {rejectWithValue}) => {
       
       try {
+
         const response = await axios.post(
             `${url}/crypto`,
           {
@@ -235,6 +235,7 @@ const cryptosSlice = createSlice({
         builder.addCase(cryptosCreate.fulfilled, (state, action) => {
 
             const newList = state.cryptos.filter((crypto) => true);
+            
             newList.push(action.payload);
             toast.success("Crypto: " + action.payload.cryptoName + " added", {
               position: "bottom-left",
@@ -263,6 +264,7 @@ const cryptosSlice = createSlice({
 
             const newList = state.cryptos.filter((crypto) => crypto.cryptoName !== action.payload.cryptoName);
             newList.push(action.payload);
+
             toast.success("Crypto: " + action.payload.cryptoName + " updated", {
               position: "bottom-left",
             });

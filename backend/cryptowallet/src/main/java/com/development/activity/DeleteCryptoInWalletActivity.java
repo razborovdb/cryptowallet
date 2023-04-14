@@ -188,6 +188,7 @@ public class DeleteCryptoInWalletActivity implements RequestHandler<DeleteCrypto
                                 if (map.containsKey(crypto.getCryptoType())) {
                                     CryptoCurrencies cryptoCurrencies = map.get(crypto.getCryptoType());
                                     crypto.setCryptoCost(crypto.getCryptoAmount() * cryptoCurrencies.getCryptoCost());
+                                    crypto.setImageUrl(cryptoCurrencies.getImageUrl());
                                     cryptos.set(i, crypto);
                                 }
 

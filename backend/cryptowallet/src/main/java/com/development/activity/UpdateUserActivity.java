@@ -1,6 +1,7 @@
 package com.development.activity;
 
 import com.amazonaws.services.lambda.runtime.Context;
+import com.amazonaws.services.lambda.runtime.LambdaLogger;
 import com.amazonaws.services.lambda.runtime.RequestHandler;
 import com.cloudinary.Cloudinary;
 import com.cloudinary.utils.ObjectUtils;
@@ -106,11 +107,15 @@ public class UpdateUserActivity implements RequestHandler<UpdateUserRequest, Upd
         }
 
         //-----------------------------------------------
-        if (user.getAvatarUrl() != null) {
-            if (!user.getAvatarUrl().equals("")) {
+        if (editUserRequest.getAvatarUrl() != null) {
+            if (!editUserRequest.getAvatarUrl().equals("")) {
                 Cloudinary cloudinary = cloudinaryImages.getCloudinary();
                 try {
-                    Map destroyRsponse = cloudinary.uploader().destroy(user.getAvatar(), ObjectUtils.asMap());
+                    if(user.getAvatar() != null) {
+                        if (!user.getAvatar().isEmpty()) {
+                            Map destroyRsponse = cloudinary.uploader().destroy(user.getAvatar(), ObjectUtils.asMap());
+                        }
+                    }
                 } catch (Exception e) {
 
                 }

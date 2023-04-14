@@ -240,7 +240,12 @@ Double paymentDate;
 * Accepts `GET` requests to `/api/user`
 * Accepts token, email as path variable returns Users.
 
-## 6.17. GetProject Endpoint (made)
+## 6.17. UpdateUser Endpoint
+
+* Accepts `PUT` requests to `/api/user`
+* Accepts token, Users as body returns Users.
+
+## 6.18. GetProject Endpoint (made)
 
 * Accepts `GET` requests to `/api/project`
 * Accepts no parameters returns Projects.

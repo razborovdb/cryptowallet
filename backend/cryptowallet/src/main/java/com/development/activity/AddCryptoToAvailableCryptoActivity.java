@@ -1,7 +1,10 @@
 package com.development.activity;
 
 import com.amazonaws.services.lambda.runtime.Context;
+import com.amazonaws.services.lambda.runtime.LambdaLogger;
 import com.amazonaws.services.lambda.runtime.RequestHandler;
+import com.cloudinary.Cloudinary;
+import com.cloudinary.utils.ObjectUtils;
 import com.development.dynamodb.CryptoDao;
 import com.development.dynamodb.UsersDao;
 import com.development.dynamodb.models.CryptoCurrencies;
@@ -9,14 +12,19 @@ import com.development.dynamodb.models.Users;
 import com.development.exceptions.*;
 import com.development.models.requests.AddCryptoToAvailableCryptoRequest;
 import com.development.models.results.AddCryptoToAvailableCryptoResult;
+import com.development.util.CloudinaryImages;
 import com.development.util.JsonWebToken;
+import com.fasterxml.jackson.databind.ObjectMapper;
 
 import javax.inject.Inject;
+import java.util.Map;
 
 public class AddCryptoToAvailableCryptoActivity implements RequestHandler<AddCryptoToAvailableCryptoRequest, AddCryptoToAvailableCryptoResult>  {
     private final UsersDao usersDao;
     private final CryptoDao cryptoDao;
     JsonWebToken jsonWebToken = new JsonWebToken();
+
+    CloudinaryImages cloudinaryImages = new CloudinaryImages();
 
 
     @Inject
@@ -29,6 +37,12 @@ public class AddCryptoToAvailableCryptoActivity implements RequestHandler<AddCry
     @Override
     public AddCryptoToAvailableCryptoResult handleRequest(
             final AddCryptoToAvailableCryptoRequest addCryptoToAvailableCryptoRequest, Context context) {
+
+//        LambdaLogger logger = context.getLogger();
+//
+//        logger.log("----------------------------------------------------------- ");
+//        logger.log(addCryptoToAvailableCryptoRequest.toString());
+//        logger.log("----------------------------------------------------------- ");
 
         if (addCryptoToAvailableCryptoRequest == null) {
 
@@ -90,9 +104,49 @@ public class AddCryptoToAvailableCryptoActivity implements RequestHandler<AddCry
                     .build().toString()
             ));
         }
+
+        // ---------------------------------------------------------------------------------------------------
+        if (addCryptoToAvailableCryptoRequest.getImageUrl() != null) {
+
+
+            Cloudinary cloudinary = cloudinaryImages.getCloudinary();
+            //
+
+            try {
+                Map uploadResult = cloudinary.uploader().upload(addCryptoToAvailableCryptoRequest.getImageUrl(),  ObjectUtils.asMap(
+                        "upload_preset", "cryptowallet"
+                ));
+
+
+                String json = new ObjectMapper().writeValueAsString(uploadResult);
+
+                String image = "";
+                if (uploadResult.containsKey("public_id")) {
+                    image = uploadResult.get("public_id").toString();
+                }
+                addCryptoToAvailableCryptoRequest.setImage(image);
+
+                String imageUrl = "";
+                if (uploadResult.containsKey("url")) {
+                    imageUrl = uploadResult.get("url").toString();
+                }
+
+                addCryptoToAvailableCryptoRequest.setImageUrl(imageUrl);
+
+            } catch (Exception e) {
+                addCryptoToAvailableCryptoRequest.setImage("");
+                addCryptoToAvailableCryptoRequest.setImageUrl("");
+
+            }
+
+        }
+
+        // --------------------------------------------------------------------------------------------------
         CryptoCurrencies newCrypto = new CryptoCurrencies();
         newCrypto.setCryptoName(addCryptoToAvailableCryptoRequest.getCryptoName());
         newCrypto.setCryptoDescription(addCryptoToAvailableCryptoRequest.getCryptoDescription());
+        newCrypto.setImage(addCryptoToAvailableCryptoRequest.getImage());
+        newCrypto.setImageUrl(addCryptoToAvailableCryptoRequest.getImageUrl());
         newCrypto.setCryptoAmount(addCryptoToAvailableCryptoRequest.getCryptoAmount());
         newCrypto.setCryptoCost(addCryptoToAvailableCryptoRequest.getCryptoCost());
 

@@ -211,6 +211,66 @@ paths:
                   code: 500,
                   error: "Server error"
                 }
+    put:
+      description: "This is used to update user's information"
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Users'
+            example: {
+              "email": "newuser@newuser.com",
+              "name": "newuser",
+              "avatar": "",
+              "avatarurl": "",
+              "password": "12345",
+              "role": "user",
+              "isAdmin": false
+            }
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/Users"
+                example: {
+                  "email": "newuser@newuser.com",
+                  "name": "newuser",
+                  "avatar": "",
+                  "avatarurl": "",
+                  "password": "12345",
+                  "role": "user",
+                  "isAdmin": false
+                }
+
+        "400":
+          description: "Invalid inputs"
+          content:
+            application/json:
+              schema:
+                type: object
+                items:
+                  $ref: "#/components/schemas/Error"
+                example: {
+                  code: 400,
+                  error: "Invalid inputs"
+                }
+        "500":
+          description: "Server error"
+          content:
+            application/json:
+              schema:
+                type: object
+                items:
+                  $ref: "#/components/schemas/Error"
+                example: {
+                  code: 500,
+                  error: "Server error"
+                }
   /api/cryptos:
     get:
       description: "This returns the list of available cryptocurrencies"

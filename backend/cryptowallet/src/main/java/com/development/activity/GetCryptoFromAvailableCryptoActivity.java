@@ -87,8 +87,8 @@ public class GetCryptoFromAvailableCryptoActivity implements RequestHandler<GetC
 
         return GetCryptoFromAvailableCryptoResult.builder()
                 .withCryptoName(findedCrypto.getCryptoName())
-                .withImage("")
-                .withImageUrl("")
+                .withImage(findedCrypto.getImage())
+                .withImageUrl(findedCrypto.getImageUrl())
                 .withCryptoDescription(findedCrypto.getCryptoDescription())
                 .withCryptoAmount(findedCrypto.getCryptoAmount())
                 .withCryptoCost(findedCrypto.getCryptoCost())
