@@ -3,12 +3,10 @@ package com.development.activity;
 import com.amazonaws.services.lambda.runtime.Context;
 import com.amazonaws.services.lambda.runtime.RequestHandler;
 import com.development.dynamodb.CryptoDao;
+import com.development.dynamodb.HistoryDao;
 import com.development.dynamodb.UsersDao;
 import com.development.dynamodb.WalletDao;
-import com.development.dynamodb.models.CryptoCurrencies;
-import com.development.dynamodb.models.CryptoCurrenciesModel;
-import com.development.dynamodb.models.Users;
-import com.development.dynamodb.models.Wallet;
+import com.development.dynamodb.models.*;
 import com.development.exceptions.*;
 import com.development.models.requests.AddCryptoToWalletRequest;
 import com.development.models.requests.UpdateWalletRequest;
@@ -27,14 +25,16 @@ public class AddCryptoToWalletActivity implements RequestHandler<AddCryptoToWall
     private final WalletDao walletDao;
 
     private final CryptoDao cryptoDao;
+    private final HistoryDao historyDao;
     JsonWebToken jsonWebToken = new JsonWebToken();
 
 
     @Inject
-    public AddCryptoToWalletActivity(UsersDao usersDao, WalletDao walletDao, CryptoDao cryptoDao) {
+    public AddCryptoToWalletActivity(UsersDao usersDao, WalletDao walletDao, CryptoDao cryptoDao, HistoryDao historyDao) {
         this.usersDao = usersDao;
         this.walletDao = walletDao;
         this.cryptoDao = cryptoDao;
+        this.historyDao = historyDao;
     }
 
 
@@ -187,6 +187,11 @@ public class AddCryptoToWalletActivity implements RequestHandler<AddCryptoToWall
         List<Wallet> wallets = walletDao.getAllWalletsForCustomerId(findedWallet.getUserId());
         updateAllWallets(wallets, cryptocurrencyList);
 
+        CryptoHistory cryptoHistory = new CryptoHistory();
+        cryptoHistory.setUserId(user.getEmail());
+        cryptoHistory.setRecordDate("ddddd");
+        cryptoHistory.setWalletsList(wallets);
+        historyDao.addHistoryRecord(cryptoHistory);
 
         walletAfterAdd = walletDao.getWallet(walletAfterAdd.getUserId(), walletAfterAdd.getWalletName());
 

@@ -111,6 +111,14 @@ Boolean isAdmin;
 ```
 
 ```
+// CryptoHistory
+
+String userid;
+String recorddate;
+List   WalletModel;
+```
+
+```
 // CryptoCurrenciesModel
 
 String cryptoName;
@@ -250,6 +258,11 @@ Double paymentDate;
 * Accepts `GET` requests to `/api/project`
 * Accepts no parameters returns Projects.
 
+## 6.18. GetUserHistory Endpoint (made)
+
+* Accepts `GET` requests to `/api/history`
+* Accepts token, email as path variable returns WalletHistory.
+
 # 7. Tables
 
 ### 7.1. `users`
@@ -305,4 +318,12 @@ paymentdescription // text
 userid // text
 projectid // text
 paymentdate // text
+```
+
+### 7.6. `cryptohistory`
+
+```
+userid // partition key, ordinal 0, text
+recorddate // sort key, text
+walletslist // list, udt (walletmodel)
 ```

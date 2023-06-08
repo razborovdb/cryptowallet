@@ -9,7 +9,7 @@ import { walletsCreateCrypto } from "../slices/WalletsSlice"
 
 const CreateCryptoInWalletTemplate = () => {
   const dispatch = useDispatch();
-  const { createStatus } = useSelector((state) => state.wallets);
+  const { createCryptoStatus } = useSelector((state) => state.wallets);
   const auth = useSelector((state) => state.auth);
   const params = useParams();
 
@@ -58,7 +58,7 @@ const CreateCryptoInWalletTemplate = () => {
       })
     );
 
-    navigate(`/edit-wallet/${walletName}`);
+    //navigate(`/edit-wallet/${walletName}`);
 
   };
 
@@ -132,7 +132,7 @@ const CreateCryptoInWalletTemplate = () => {
           />
 
           <PrimaryButton type="submit">
-            {createStatus === "pending" ? "Submitting" : "Submit"}
+            {createCryptoStatus === "pending" ? "Submitting" : "Submit"}
           </PrimaryButton>
           <div className="back-to-wallet">
             <Link to={`/edit-wallet/${walletName}`}>
